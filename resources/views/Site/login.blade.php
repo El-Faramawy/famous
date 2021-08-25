@@ -57,22 +57,22 @@
                     <h5 class="modal-title">كود تفعيل الهاتف</h5>
                     <button id="close_modal" type="button" class="btn-close close_model" data-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    <div class="title">
-                        <h3> كود التفعيل </h3>
-                    </div>
-                    <form id="confirm_form" method="post"  action="{{url('post_login')}}">
-                        @csrf
-                        <div class="form-outline">
-                            <input class="form-control numbersOnly" id="verificationCode" type="text" maxlength="6">
-                            <input id="user_id" name="id" type="hidden" value="">
+                <form id="confirm_form" method="post"  action="{{url('post_login')}}">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="title">
+                            <h3> كود التفعيل </h3>
                         </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary close_model" data-dismiss="modal">الغاء</button>
-                    <button type="submit" id="ConfirmPhoneCode" class="btn btn-primary" >تاكيد</button>
-                </div>
+                            <div class="form-outline">
+                                <input class="form-control numbersOnly" id="verificationCode" type="text" maxlength="6">
+                                <input id="user_id" name="id" type="hidden" value="">
+                            </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary close_model" data-dismiss="modal">الغاء</button>
+                        <button type="submit" id="ConfirmPhoneCode" class="btn btn-primary" >تاكيد</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -82,7 +82,7 @@
 @push('site_js')
     <script>
 
-        $(document).on('click','#check_phone',function(e) {
+        $(document).on('submit','form#Form',function(e) {
             e.preventDefault();
             var myForm = $("#Form")[0]
             var formData = new FormData(myForm)
@@ -134,7 +134,7 @@
             });
         });
 
-        $(document).on('click','#ConfirmPhoneCode',function(e) {
+        $(document).on('submit','form#confirm_form',function(e) {
             e.preventDefault();
 
             var myForm = $("#confirm_form")[0]

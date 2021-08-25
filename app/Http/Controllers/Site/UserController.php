@@ -136,6 +136,12 @@ class UserController extends Controller
         return view('Site/login',compact('setting'));
     }
 //=====================================================================================================
+    public function logout()
+    {
+        Auth::logout();
+        return redirect('login')->with(notification('تم تسجيل الخروج','info'));
+    }
+//=====================================================================================================
     public function post_login(Request $request)
     {
         $user = User::where('id',$request->id)->first();

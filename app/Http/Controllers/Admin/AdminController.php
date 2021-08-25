@@ -39,19 +39,17 @@ class AdminController extends Controller
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function admin_delete(Request $request){
-        $get=Admin::where('id',$request->id)->get();
-        foreach ($get as $delete_){
-            delete_file($delete_->image);
-        }
+        $get=Admin::where('id',$request->id)->first();
+            delete_file($get->image);
         $delete=Admin::find($request->id)->delete();
-        return redirect('admin/show-admins')->with(notification('تم الحذف','warning'));
+        return redirect('admin/show-admins')/*->with(notification('تم الحذف','warning'))*/;
     }//end fun
     /**
      * @param Request $request
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function admin_edit(Request $request){
-        $get=Admin::where('id',$request->id)->get();
+    public function admin_edit($id){
+        $get=Admin::where('id',$id)->get();
         return view('Admin/Admin/edit',['data'=>$get]);
     }//end fun
     /**
@@ -97,7 +95,7 @@ class AdminController extends Controller
     }
 
     public function save_profile(Request $request){
-        if (admin()->user()->email != $request->email){
+        if (auth()->guard('admin')->user()->email != $request->email){
             $valedator =Validator::make($request->all(),[
                 'email'=> [ 'unique:admins'],
             ]);
@@ -105,7 +103,7 @@ class AdminController extends Controller
                 return back()->with(notification('هذا البريد الإلكترونى موجود مسبقا','warning'));
             }
         }
-        $update=Admin::find(admin()->user()->id);
+        $update=Admin::find(auth()->guard('admin')->user()->id);
         $update->name=$request->name;
         $update->email=$request->email;
         $update->phone=$request->phone;
@@ -113,7 +111,7 @@ class AdminController extends Controller
             $update->password=Hash::make($request->password);
         }
         if (isset($request->image)){
-            $update->image = upload_image('admin','image',admin()->user()->image);
+            $update->image = upload_image('admin','image',auth()->guard('admin')->user()->image);
         }
         $update->save();
         return back()->with(notification('تم التعديل','info'));

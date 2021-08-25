@@ -17,7 +17,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <!-- begin::Head -->
 <head>
     <meta charset="utf-8" />
-    <title>تسجيل الدخول</title>
+    <title>صيت المشاهير | تسجيل الدخول</title>
     <meta name="description" content="Latest updates and statistic charts">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
 
@@ -35,16 +35,16 @@ License: You must have a valid license purchased only from themeforest(the above
     <!--end::Web font -->
 
     <!--begin::Global Theme Styles -->
-{{--    <link href="../../../assets/vendors/base/vendors.bundle.css" rel="stylesheet" type="text/css" />--}}
+    {{--    <link href="../../../assets/vendors/base/vendors.bundle.css" rel="stylesheet" type="text/css" />--}}
 
-        <link href="{{url('admin/auth')}}/vendors.bundle.rtl.css" rel="stylesheet" type="text/css" />
+    <link href="{{url('admin/auth')}}/vendors.bundle.rtl.css" rel="stylesheet" type="text/css" />
 
-{{--    <link href="../../../assets/demo/default/base/style.bundle.css" rel="stylesheet" type="text/css" />--}}
+    {{--    <link href="../../../assets/demo/default/base/style.bundle.css" rel="stylesheet" type="text/css" />--}}
 
-        <link href="{{url('admin/auth')}}/style.bundle.rtl.css" rel="stylesheet" type="text/css" />
+    <link href="{{url('admin/auth')}}/style.bundle.rtl.css" rel="stylesheet" type="text/css" />
 
     <!--end::Global Theme Styles -->
-    <link rel="shortcut icon" href="{{url('admin/auth')}}/logo-1.png" />
+    <link rel="shortcut icon" href="{{url('Site')}}/img/logo.png" />
 
 
 
@@ -67,7 +67,7 @@ License: You must have a valid license purchased only from themeforest(the above
     {{--==============================================    end  css   ====================================--}}
 
 
-{{--    end css--}}
+    {{--    end css--}}
 
 
 
@@ -86,11 +86,11 @@ License: You must have a valid license purchased only from themeforest(the above
 <!-- begin:: Page -->
 <div class="m-grid m-grid--hor m-grid--root m-page">
     <div class="m-grid__item m-grid__item--fluid m-grid m-grid--hor m-login m-login--signin m-login--2 m-login-2--skin-2" id="m_login" style="background-image: url({{url('admin/auth')}}/bg-3.jpg);">
-        <div class="m-grid__item m-grid__item--fluid	m-login__wrapper">
+        <div class="m-grid__item m-grid__item--fluid	m-login__wrapper" style="padding-top: 10px;">
             <div class="m-login__container">
                 <div class="m-login__logo">
                     <a href="#">
-                        <img src="{{url('admin/auth')}}/logo-1.png">
+                        <img src="{{url('Site')}}/img/logo.png" width="50px" height="50px">
                     </a>
                 </div>
                 <div class="m-login__signin">
@@ -98,7 +98,7 @@ License: You must have a valid license purchased only from themeforest(the above
                         <h3 class="m-login__title">تسجيل</h3>
                     </div>
                     <form class="m-login__form m-form" action="{{route('do-log')}}" enctype="application/x-www-form-urlencoded" method="post">
-                      @csrf
+                        @csrf
                         <div class="form-group m-form__group">
                             <input class="form-control m-input" type="email" placeholder="البريد الإلكترونى" name="email"  required>
                         </div>

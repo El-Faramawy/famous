@@ -35,6 +35,25 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.0.18/sweetalert2.min.css">
 <!-- CSS only -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+{{--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">--}}
 <!-- Js only -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+{{--/============dropzone=============--}}
+<link rel="stylesheet" type="text/css" href="{{ asset('site/css/dropzone.css') }}">
+<script src="{{ asset('site/js/dropzone.js') }}"></script>
+<style>
+    .dropzoneDragArea {
+        background-color: #fbfdff;
+        border: 1px dashed #c0ccda;
+        border-radius: 6px;
+        padding: 60px;
+        text-align: center;
+        margin-bottom: 15px;
+        cursor: pointer;
+    }
+    .dropzone{
+        box-shadow: 0px 2px 20px 0px #f2f2f2;
+        border-radius: 10px;
+    }
+</style>

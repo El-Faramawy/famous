@@ -105,23 +105,23 @@
                     <h5 class="modal-title">كود تفعيل الهاتف</h5>
                     <button id="close_modal" type="button" class="btn-close close_model" data-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    <div class="title">
-                        <h3> كود التفعيل </h3>
+                <form id="confirm_form" method="post"  >
+                    @csrf
+                    <div class="modal-body">
+                        <div class="title">
+                            <h3> كود التفعيل </h3>
+                        </div>
+                            {{--                 action="{{url('confirm_code',$phone->id)}}"       @csrf--}}
+            {{--                                        <P class="mb-4">من فضلك ادخل رمز التحقق المرسل الى <br> <a class="color1" href="#"> {{$phone->phone}} </a></P>--}}
+                        <div class="form-outline">
+                            <input class="form-control numbersOnly" id="verificationCode" type="text" maxlength="6">
+                        </div>
                     </div>
-                    <form id="confirm_form" method="post"  >
-                        @csrf
-                        {{--                 action="{{url('confirm_code',$phone->id)}}"       @csrf--}}
-        {{--                                        <P class="mb-4">من فضلك ادخل رمز التحقق المرسل الى <br> <a class="color1" href="#"> {{$phone->phone}} </a></P>--}}
-                    <div class="form-outline">
-                        <input class="form-control numbersOnly" id="verificationCode" type="text" maxlength="6">
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary close_model" data-dismiss="modal">الغاء</button>
+                        <button type="submit" id="store_user" class="btn btn-primary" >تاكيد</button>
                     </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary close_model" data-dismiss="modal">الغاء</button>
-                    <button type="submit" id="store_user" class="btn btn-primary" >تاكيد</button>
-                </div>
+                </form>
             </div>
         </div>
     </div>
@@ -191,7 +191,7 @@
             });
         });
 
-        $(document).on('click','#store_user',function(e) {
+        $(document).on('submit','form#confirm_form',function(e) {
             e.preventDefault();
             // alert(1)
             var myForm = $("#Form")[0]

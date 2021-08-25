@@ -7,42 +7,25 @@
       <!-- img Swiper -->
       <div class="swiper-container verticalSlider">
         <div class="swiper-wrapper">
-          <div class="swiper-slide">
-            <img src="{{url('site')}}/img/BG1.jpg">
-          </div>
-          <div class="swiper-slide">
-            <img src="{{url('site')}}/img/BG2.jpg">
-          </div>
-          <div class="swiper-slide">
-            <img src="{{url('site')}}/img/BG3.jpg">
-          </div>
+            @foreach($show_sliders as $show_slider )
+                <div class="swiper-slide">
+                  <img src={{asset('uploads/slider/'. $show_slider->image)}}>
+               </div>
+            @endforeach
         </div>
       </div>
       <!-- Data Swiper -->
       <div class="swiper-container mainSlider">
         <div class="swiper-wrapper">
-          <div class="swiper-slide">
-            <div class="slideContent">
-              <h4> اهلا بك في منصة صيت المشاهير</h4>
-              <p> المنصة الاولي والاكبر في العالم العربي في التوصل بين العملاء والمشاهير للاعلان من خلال منصاتهم ومواقع
-                التواصل الخاصة بهم</p>
-              <a href="{{url('login')}}" class="animateBTN"> سجل الدخول </a>
-            </div>
-          </div>
-          <div class="swiper-slide">
-            <div class="slideContent">
-              <h4> وصل اعلانك بسرعة </h4>
-              <p> يمكنك التواصل مع المشاهير لطلب اعلان عن خدماتك بساطة وسرعة وضمان لعملية الاعلان </p>
-              <a href="{{url('all-famous')}}" class="animateBTN"> المشاهير </a>
-            </div>
-          </div>
-          <div class="swiper-slide">
-            <div class="slideContent">
-              <h4> قم بانشاء حسابك </h4>
-              <p> وسارع بالتواصل مع المشاهير وقم بطلب اعلان لخدماتك</p>
-              <a href="{{url('register-user')}}" class="animateBTN"> انشاء حساب</a>
-            </div>
-          </div>
+            @foreach($show_sliders as $show_slider )
+                <div class="swiper-slide">
+                    <div class="slideContent">
+                      <h4> {{$show_slider->title}}</h4>
+                       <p>{{$show_slider->content}}</p>
+                      <a href="{{$show_slider->btn_link}}" class="animateBTN">{{$show_slider->btn_name}} </a>
+                    </div>
+                </div>
+            @endforeach
         </div>
       </div>
       <div id="particles-js"></div>
@@ -53,45 +36,16 @@
         <h4> تبحث عن مشهور معين ؟ </h4>
         <form class="row">
           <div class="col-md-6 m-auto">
-            <input class="form-control" type="text" placeholder="بحث ... ">
+            <input class="form-control" type="text" id="myInput" onkeyup="myFunction()" placeholder="بحث ... ">
             <div class="searchList " style="display: none;">
-              <ul>
+              <ul id="myUL">
+               @foreach($searched_famous as $searched_fam )
                 <li>
-                  <a href="{{url('profile')}}"> <img src="{{url('site')}}/img/Users/14.jpg">
-                    طلال خالد
-                  </a>
+                      <a href="{{url('profile')}}"> <img src={{asset('uploads/famous/'. $searched_fam->image)}}>
+                          {{$searched_fam->name}}
+                      </a>
                 </li>
-                <li>
-                  <a href="{{url('profile')}}"> <img src="{{url('site')}}/img/Users/14.jpg">
-                    طلال خالد
-                  </a>
-                </li>
-                <li>
-                  <a href="{{url('profile')}}"> <img src="{{url('site')}}/img/Users/14.jpg">
-                    طلال خالد
-                  </a>
-                </li>
-                <li>
-                  <a href="{{url('profile')}}"> <img src="{{url('site')}}/img/Users/14.jpg">
-                    طلال خالد
-                  </a>
-                </li>
-                <li>
-                  <a href="{{url('profile')}}"> <img src="{{url('site')}}/img/Users/14.jpg">
-                    طلال خالد
-                  </a>
-                </li>
-                <li>
-                  <a href="{{url('profile')}}"> <img src="{{url('site')}}/img/Users/14.jpg">
-                    طلال خالد
-                  </a>
-                </li>
-                <li>
-                  <a href="{{url('profile')}}"> <img src="{{url('site')}}/img/Users/14.jpg">
-                    طلال خالد
-                  </a>
-                </li>
-
+               @endforeach
               </ul>
             </div>
           </div>
@@ -107,60 +61,17 @@
         <div class="famousVIPSlider">
           <div class="swiper-container ">
             <div class="swiper-wrapper">
-              <div class="swiper-slide p-2">
-                <a href="{{url('profile')}}" class=" famous vip">
-                  <img src="{{url('site')}}/img/Users/14.jpg">
-                  <div class="info">
-                    <p> طلال خالد </p>
-                    <span> فنان </span>
+             @foreach($vip_famouses as $vip_famouse )
+                    <div class="swiper-slide p-2">
+                    <a href="{{url('profile')}}" class=" famous vip">
+                      <img src="{{asset('uploads/famous/'. $vip_famouse->image)}}">
+                      <div class="info">
+                        <p> {{$vip_famouse->name}} </p>
+                        <span>{{$vip_famouse->job->title}} </span>
+                      </div>
+                    </a>
                   </div>
-                </a>
-              </div>
-              <div class="swiper-slide p-2">
-                <a href="{{url('profile')}}" class=" famous vip">
-                  <img src="{{url('site')}}/img/Users/15.jpg">
-                  <div class="info">
-                    <p> سلطان بندر </p>
-                    <span> يوتيوبر </span>
-                  </div>
-                </a>
-              </div>
-              <div class="swiper-slide p-2">
-                <a href="{{url('profile')}}" class=" famous vip">
-                  <img src="{{url('site')}}/img/Users/16.jpg">
-                  <div class="info">
-                    <p>خالد سلطان </p>
-                    <span> فنان </span>
-                  </div>
-                </a>
-              </div>
-              <div class="swiper-slide p-2">
-                <a href="{{url('profile')}}" class=" famous vip">
-                  <img src="{{url('site')}}/img/Users/12.jpg">
-                  <div class="info">
-                    <p> راكان ال حمد </p>
-                    <span> استريمر </span>
-                  </div>
-                </a>
-              </div>
-              <div class="swiper-slide p-2">
-                <a href="{{url('profile')}}" class=" famous vip">
-                  <img src="{{url('site')}}/img/Users/8.jpg">
-                  <div class="info">
-                    <p> بندر ال تركي </p>
-                    <span> مذيع </span>
-                  </div>
-                </a>
-              </div>
-              <div class="swiper-slide p-2">
-                <a href="{{url('profile')}}" class=" famous vip">
-                  <img src="{{url('site')}}/img/Users/6.jpg">
-                  <div class="info">
-                    <p> وليد سعود </p>
-                    <span> فنان </span>
-                  </div>
-                </a>
-              </div>
+             @endforeach
             </div>
           </div>
           <!-- Add Arrows -->
@@ -170,110 +81,97 @@
       </div>
     </section>
     <!-- More famous -->
-    <section class="moreFamous">
-      <div class="container">
-        <div class="row align-items-center">
-          <div class="col-md-6 p-0 order-md-last">
+      <section class="moreFamous">
+          <div class="container">
+              <div class="row align-items-center">
+                  <div class="col-md-6 p-0 order-md-last">
 
-            <div class="entry-media">
-              <img src="{{url('site')}}/img/BG2.jpg" class="sizer">
+                      <div class="entry-media">
+                          <img src="{{asset('uploads/about/'. $show_abouts->image)}}">
+                          <div class="entry-hover">
+                              <a href=""><i class="fal fa-radar"></i></a>
+                          </div>
+                          <svg viewBox="0 0 25 100" class="curved-shape">
+                              <path d="M25,0C25,37.5,0,37.5,0,50s25,12.5,25,50"></path>
+                          </svg>
+                      </div>
+                  </div>
 
-              <div class="entry-hover">
-                <a href="#!"><i class="fal fa-radar"></i></a>
+                  <div class="col-md-6 p-0 order-md-first">
+                      <div class="entry-info">
+                          <h3>{{$show_abouts->title}} </h3>
+                              <p>{{$show_abouts->content}}</p>
+                          <a href="" class="animateBTN"> {{$show_abouts->btn_name}} </a>
+                      </div>
+                  </div>
               </div>
-              <svg viewBox="0 0 25 100" class="curved-shape">
-                <path d="M25,0C25,37.5,0,37.5,0,50s25,12.5,25,50"></path>
-              </svg>
-            </div>
-          </div>
-          <div class="col-md-6 p-0 order-md-first">
-            <div class="entry-info">
+              <div class="row align-items-center">
+                  <div class="col-md-6 p-0 ">
 
-              <h3> مشاهير </h3>
-              <p>يضم مشاهير السوشيال ميديا الذين يمتلكون شعبية عالية يمكنك ترويج خدماتك من خلالهم ليصل اعلانك الي اقصي
-                عدد ممكن من الاشخاص </p>
-              <a href="{{url('all-famous')}}" class="animateBTN"> مشاهير </a>
+                      <div class="entry-media">
+                          <img src="{{asset('uploads/about/'. $show_abouts2->image)}}">
+                          <div class="entry-hover">
+                              <a href=""><i class="fal fa-radar" aria-hidden="true"></i></a>
+                          </div>
+                          <svg viewBox="0 0 25 100" class="curved-shape curved-shape2">
+                              <path d="M25,0C25,37.5,0,37.5,0,50s25,12.5,25,50"></path>
+                          </svg>
+                      </div>
+                  </div>
+                  <div class="col-md-6 p-0 ">
+                      <div class="entry-info">
 
-            </div>
-          </div>
+                          <h3> {{$show_abouts2->title}} </h3>
+                              <p> {{$show_abouts2->content}}</p>
+                          <a href="" class="animateBTN">{{$show_abouts2->btn_name}} </a>
+
+                      </div>
+                  </div>
 
 
-        </div>
-        <div class="row align-items-center">
-          <div class="col-md-6 p-0 ">
-
-            <div class="entry-media">
-              <img src="{{url('site')}}/img/BG1.jpg" class="sizer">
-
-              <div class="entry-hover">
-                <a href="#!"><i class="fal fa-radar"></i></a>
               </div>
-              <svg viewBox="0 0 25 100" class="curved-shape curved-shape2">
-                <path d="M25,0C25,37.5,0,37.5,0,50s25,12.5,25,50"></path>
-              </svg>
-            </div>
+
           </div>
-          <div class="col-md-6 p-0 ">
-            <div class="entry-info">
-
-              <h3> مشاهير متنوعون </h3>
-              <p>يضم مشاهير السوشيال ميديا الذين يمتلكون شعبية عالية يمكنك ترويج خدماتك من خلالهم ليصل اعلانك الي اقصي
-                عدد ممكن من الاشخاص </p>
-              <a href="{{url('all-famous')}}" class="animateBTN"> مشاهير متنوعون </a>
-
-            </div>
-          </div>
-
-
-        </div>
-
-      </div>
-    </section>
+      </section>
     <!-- Counter -->
     <section class="Counter-area">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-3 col-md-6 col-6 p-1">
-            <div class="single-Counter">
-              <h3>
-                <span class="odometer" data-count="997">00</span>
-              </h3>
-              <i class="fad fa-stars"></i>
-              <p> مشاهير </p>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-6 col-6 p-1">
-            <div class="single-Counter">
-              <h3>
-                <span class="odometer" data-count="1358">00</span>
-              </h3>
-              <i class="fad fa-scroll-old"></i>
-              <p> عقود </p>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-6 col-6 p-1">
-            <div class="single-Counter">
-              <h3>
-                <span dir="ltr" class="odometer" data-count="968">00</span>
-              </h3>
-              <i class="fad fa-trophy"></i>
-              <p> عملاء </p>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-6 col-6 p-1">
-            <div class="single-Counter">
-              <h3>
-                <span dir="ltr" class="odometer" data-count="99">00</span><span class="target">%</span>
-              </h3>
-              <i class="fad fa-laugh-beam"></i>
-              <p>نسبة السعادة</p>
-            </div>
-          </div>
-        </div>
-      </div>
+            <div class="container">
+                <div class="row">
+                    @foreach($show_counters as $show_counter)
+                        <div class="col-lg-3 col-md-6 col-6 p-1">
+                    <div class="single-Counter">
+                      <h3>
+                        <span class="odometer" data-count="{{$show_counter->number}}">00</span>
+                      </h3>
+                      <i class="fad fa-stars"></i>
+                      <p> {{$show_counter->title}} </p>
+                    </div>
+                  </div>
+                    @endforeach
+                </div>
+              </div>
     </section>
 
 
   </content>
 
 @endsection
+<script>
+function myFunction() {
+var input, filter, ul, li, a, i, txtValue;
+input = document.getElementById("myInput");
+filter = input.value.toUpperCase();
+ul = document.getElementById("myUL");
+li = ul.getElementsByTagName("li");
+for (i = 0; i < li.length; i++) {
+a = li[i].getElementsByTagName("a")[0];
+txtValue = a.textContent || a.innerText;
+if (txtValue.toUpperCase().indexOf(filter) > -1) {
+li[i].style.display = "";
+} else {
+li[i].style.display = "none";
+}
+}
+}
+</script>
+

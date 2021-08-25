@@ -1,40 +1,19 @@
-<script src="{{url('/')}}admin/js/jquery-3.4.1.min.js"></script>
-<script src="{{url('/')}}/admin/js/popper.min.js"></script>
-<script src="{{url('/')}}/admin/js/bootstrap.min.js"></script>
-<script src="{{url('/')}}/admin/js/mdb.min.js"></script>
-<script src="{{url('/')}}/admin/js/smooth-scroll.min.js"></script>
-<script src="{{url('/')}}/admin/js/swiper.js"></script>
-<script src="{{url('/')}}/admin/js/aos.js"></script>
-<script src="{{url('/')}}/admin/js/datatables2.min.js"></script>
-<script src="{{url('/')}}/admin/js/Custom.js"></script>
-<script src="{{url('/')}}/admin/js/bootoast.min.js"></script>
 
-<script>
-    $.validate({
-    });
-</script>
-<script src="{{url('admin')}}/js/jquery.form-validator.js"></script>
+<script src="{{url('/')}}/admin/assets/plugins/global/plugins.bundle.js"></script>
+<script src="{{url('/')}}/admin/assets/js/scripts.bundle.js"></script>
+<!--end::Global Javascript Bundle-->
+<!--begin::Page Custom Javascript(used by this page)-->
+<script src="{{url('/')}}/admin/assets/js/custom/widgets.js"></script>
+<script src="{{url('/')}}/admin/assets/js/custom/apps/chat/chat.js"></script>
+<script src="{{url('/')}}/admin/assets/js/custom/modals/create-app.js"></script>
+<script src="{{url('/')}}/admin/assets/js/custom/modals/upgrade-plan.js"></script>
+<script src="{{url('/')}}/admin/assets/js/custom/modals/new-target.js"></script>
 
-<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
 
-<!--begin::Global Theme Bundle -->
-<script src="{{url('admin')}}/assets/vendors/base/vendors.bundle.js" type="text/javascript"></script>
-<script src="{{url('admin')}}/assets/demo/demo6/base/scripts.bundle.js" type="text/javascript"></script>
 
-<!--end::Global Theme Bundle -->
-
-<!--begin::Page Vendors -->
-<script src="{{url('admin')}}/assets/vendors/custom/fullcalendar/fullcalendar.bundle.js" type="text/javascript"></script>
-
-<!--end::Page Vendors -->
-
-<!--begin::Page Scripts -->
-<script src="{{url('admin')}}/assets/app/js/dashboard.js" type="text/javascript"></script>
 
 {{--=================  dropfy  ================--}}
 
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.1/dropzone.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.min.js"></script>
 <script>
     $.ajaxSetup({
@@ -44,90 +23,35 @@
     });
 </script>
 <script>
-    $(document).ready(function () {
-        $('.dropify').dropify();
-    });//end jquery
+    // $(document).ready(function () {
+    $('.dropify').dropify();
+    // });//end jquery
 </script>
 
 <script type="text/javascript">
-    $(document).ready(function() {
-        $('.file_upload').imageuploadify();
-    })
+    // $(document).ready(function() {
+    $('.file_upload').imageuploadify();
+    // })
 </script>
 
 
 <script>
-    $(function () {
-        $('.selectpicker').selectpicker();
-    });
-</script>
-{{--======================= end dropyfi========================--}}
-
-<script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
-<script type="text/javascript" charset="utf8" src="http://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
-<!--begin::Page Vendors -->
-<script src="{{url('admin')}}/assets/vendors/custom/datatables/datatables.bundle.js" type="text/javascript"></script>
-
-<script src="{{url('admin')}}/assets/demo/custom/crud/datatables/extensions/buttons.js" type="text/javascript"></script>
-
-<script src="{{url('admin/js')}}/dataTables.buttons.min.js"></script>
-
-<script>
-    $(document).ready(function() {
-        $('#example').DataTable( {
-            "language": {
-                "lengthMenu": "عرض _MENU_ من المدخلات",
-                "zeroRecords": "نأسف لم نجد أى بيانات",
-                "info": "عرض الصفحه _PAGE_ من _PAGES_",
-                "infoEmpty": "لا يوجد بيانات متاحه",
-                "infoFiltered": "(تم البحث فى _MAX_ من المدخلات)"
-            },
-            dom: 'Blfrtip',
-            buttons: [
-                'copy', 'csv', 'excel', 'pdf', 'print'
-            ],
-            "lengthMenu": [ [10, 25, 50, -1], [10, 25, 50, "الكل"] ]
-        } );
-    } );
-</script>
-<script>
-    function check_all()
-    {
-        $('input[class="item_checkbox"]:checkbox').each(function(){
-            if ( $('input[class="check_all"]:checkbox:checked').length == 0 ) {
-                $(this).prop('checked', false);
-            }else {
-                $(this).prop('checked', true);
-            }
-        });
-    }
+    // $(function () {
+    $('.selectpicker').selectpicker();
+    // });
 </script>
 
-{{--=====================  select to  =========================--}}
-
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
-<script>
-    $(document).ready(function() {
-        $('.js-example-basic-multiple').select2();
-    });
-</script>
-
-{{--=====================  numbersOnly  =========================--}}
-
-<script>
-    jQuery('.numbersOnly').keyup(function () {
-        this.value = this.value.replace(/[^0-9\.]/g,'');
-    });
-</script>
 
 {{--===================  toster ==============================--}}
-
 <script src="{{url('admin/js')}}/tostar.js"></script>
+
 <script>
+
     @if (Session::has('message'))
     var type = "{{ Session::get('alert-type', 'info') }}"
     switch(type){
         case 'info':
+
             toastr.options.timeOut = 10000;
             toastr.info("{{Session::get('message')}}");
             var audio = new Audio('audio.mp3');
@@ -161,30 +85,164 @@
     @endif
 </script>
 
+
 <script type="text/javascript" charset="utf8" src="{{url('admin/js')}}/check.js"></script>
 
-{{--==================  Ajax ====================--}}
 
-{{--<script type="text/javascript">--}}
-{{--    $('#get_items').on('change',function(){--}}
-{{--        $value=$(this).val();--}}
-{{--        var val = $value;--}}
-{{--        var routeAction='{{route('store-first-data')}}';$.ajax({--}}
-{{--            type: 'get',--}}
-{{--            url: routeAction,--}}
-{{--            data: {'store':val},--}}
-{{--            success:function(data){--}}
-{{--                if (data=='not'){--}}
-{{--                    $('#first').hide();--}}
-{{--                    $('#alert').show();--}}
-{{--                }else {--}}
-{{--                    $('#first').show();--}}
-{{--                    $('#alert').hide();--}}
-{{--                    $('#tbody').html(data);--}}
-{{--                }--}}
-{{--            }--}}
-{{--        });--}}
-{{--    });--}}
-{{--</script>--}}
+<script>
+    function check_all()
+    {
+        $('input[class="item_checkbox"]:checkbox').each(function(){
+            if ( $('input[class="check_all"]:checkbox:checked').length == 0 ) {
+                $(this).prop('checked', false);
+            }else {
+                $(this).prop('checked', true);
+            }
+        });
+    }
+</script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.0.18/sweetalert2.min.js"></script>
+
+
+<script>
+    $(document).on('click','.delete_element',function (e) {
+        var id = $(this).attr('data_id')
+        var td = $(this)
+        var routeAction = $(this).attr('data_delete')
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: 'btn btn-success',
+                cancelButton: 'btn btn-danger'
+            },
+            buttonsStyling: false
+        })
+
+        swalWithBootstrapButtons.fire({
+            title: 'هل انت متأكد من الحذف ؟',
+            text: "سيتم حذف المحدد!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'حذف !',
+            cancelButtonText: 'الغاء !',
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: 'POST',
+                    url: routeAction,
+                    data: {'id':id},
+                    success:function(data){
+                        td.parent().parent().remove();
+                        swalWithBootstrapButtons.fire(
+                            'تم الحذف !',
+                            'تم حذف العنصر بنجاح .',
+                            'success'
+                        )
+                    }
+                });
+            } else if (
+                /* Read more about handling dismissals below */
+                result.dismiss === Swal.DismissReason.cancel
+            ) {
+                swalWithBootstrapButtons.fire(
+                    'تم الغاء الحذف ',
+                    'العنصر المحدد موجود بامان ',
+                    'error'
+                )
+            }
+        });
+    })
+    $(document).on('click','.multicheck',function (e) {
+        var id = $(this).attr('data_id')
+        var td = $(this)
+        var routeAction = $(this).attr('data_delete')
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: 'btn btn-success',
+                cancelButton: 'btn btn-danger'
+            },
+            buttonsStyling: false
+        })
+
+        swalWithBootstrapButtons.fire({
+            title: 'هل انت متأكد من الحذف ؟',
+            text: "سيتم حذف المحدد!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'حذف !',
+            cancelButtonText: 'الغاء !',
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: 'POST',
+                    url: routeAction,
+                    data: {'id':id},
+                    success:function(data){
+                        td.parent().parent().remove();
+                        swalWithBootstrapButtons.fire(
+                            'تم الحذف !',
+                            'تم حذف العنصر بنجاح .',
+                            'success'
+                        )
+                    }
+                });
+            } else if (
+                /* Read more about handling dismissals below */
+                result.dismiss === Swal.DismissReason.cancel
+            ) {
+                swalWithBootstrapButtons.fire(
+                    'تم الغاء الحذف ',
+                    'العنصر المحدد موجود بامان ',
+                    'error'
+                )
+            }
+        });
+    })
+</script>
+
+<script>
+    jQuery('.numbersOnly').keyup(function () {
+        this.value = this.value.replace(/[^0-9\.]/g,'');
+    });
+</script>
+
+@stack('admin_js')
+
+{{--//===========================    data table  =========================--}}
+
+<script src="{{url('admin')}}/assets/plugins/custom/datatables/datatables.bundle.js"></script>
+<script src="{{url('admin')}}/assets/plugins/custom/prismjs/prismjs.bundle.js"></script>
+<!--end::Page Vendors Javascript-->
+<!--begin::Page Custom Javascript(used by this page)-->
+{{--<script src="{{url('admin')}}/assets/js/custom/documentation/general/datatables/advanced.js"></script>--}}
+
+<script>
+    $("#kt_datatable_example_5").DataTable({
+        "language": {
+            "lengthMenu": "اظهار _MENU_",
+        },
+        "dom":
+            "<'row'" +
+            "<'col-sm-6 d-flex align-items-center justify-conten-start'l>" +
+            "<'col-sm-6 d-flex align-items-center justify-content-end'f>" +
+            ">" +
+
+            "<'table-responsive'tr>" +
+
+            "<'row'" +
+            "<'col-sm-12 col-md-5 d-flex align-items-center justify-content-center justify-content-md-start'i>" +
+            "<'col-sm-12 col-md-7 d-flex align-items-center justify-content-center justify-content-md-end'p>" +
+            ">"
+    });
+</script>
+<script>
+    @toastr_css
+    @toastr_js
+    @toastr_render
+</script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 

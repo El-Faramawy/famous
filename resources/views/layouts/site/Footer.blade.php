@@ -1,3 +1,7 @@
+<?php
+$setting = \App\Models\Setting::first();
+?>
+
 <div class=" footer-section">
     <!-- Footer -->
     <div class="footer">
@@ -17,17 +21,17 @@
                         <h4 class="footer-title">منصة صيت المشاهير</h4>
                         <ul class="widget-info">
                             <li>
-                                <p> <i class="fas fa-envelope"></i> <a href="#!">address@gmail.com</a> </p>
+                                <p> <i class="fas fa-envelope"></i> <a href="#!">{{$setting->gmail}}</a> </p>
                             </li>
                             <li>
-                                <p> <i class="fa fa-phone"></i> <a href="#!">0123456789</a> </p>
+                                <p> <i class="fa fa-phone"></i> <a href="#!">{{$setting->phone}}</a> </p>
                             </li>
                         </ul>
                         <ul class="social">
-                            <li><a href="#!"><i class="fab fa-facebook-f"></i></a></li>
-                            <li><a href="#!"><i class="fab fa-twitter"></i></a></li>
-                            <li><a href="#!"><i class="fab fa-whatsapp"></i></a></li>
-                            <li><a href="#!"><i class="fab fa-instagram"></i></a></li>
+                            <li><a href="{{$setting->facebook}}"><i class="fab fa-facebook-f"> </i></a></li>
+                            <li><a href="{{$setting->twitter}}"><i class="fab fa-twitter"></i></a></li>
+                            <li><a href="{{$setting->whatsapp}}"><i class="fab fa-whatsapp"></i></a></li>
+                            <li><a href="{{$setting->youtube}}"><i class="fab fa-youtube"></i></a></li>
                         </ul>
                     </div>
                 </div>
@@ -46,8 +50,9 @@
                         <div class="widget-subscribe">
 
                             <div class="widget-form">
-                                <form action="#">
-                                    <input type="text" placeholder="البريد الالكتروني">
+                                <form action="{{route('site_offers')}}" method="post">
+                                    @csrf
+                                    <input type="text" placeholder="البريد الالكتروني" name="email">
                                     <button type="submit" href="#!" class="animateBTN"> اشترك الان </button>
                                 </form>
                             </div>

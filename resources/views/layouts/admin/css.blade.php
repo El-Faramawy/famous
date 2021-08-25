@@ -1,13 +1,33 @@
-<title>متجر بطاقت</title>
-<meta name="description" content="Latest updates and statistic charts">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
-{{--==============================================    start  css   ====================================--}}
+<meta charset="utf-8" />
+<title>صيت المشاهير | لوحة التحكم</title>
+<meta name="description" content="Metronic admin dashboard live demo. Check out all the features of the admin panel. A large number of settings, additional services and widgets." />
+<meta name="keywords" content="Metronic, bootstrap, bootstrap 5, Angular 11, VueJs, React, Laravel, admin themes, web design, figma, web development, ree admin themes, bootstrap admin, bootstrap dashboard" />
+<link rel="canonical" href="Https://preview.keenthemes.com/metronic8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="shortcut icon" href="{{url('admin')}}/assets/media/logos/favicon.ico" />
+<!--begin::Fonts-->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<!--end::Fonts-->
+<!--begin::Global Stylesheets Bundle(used by all pages)-->
+<link href="{{url('admin')}}/assets/plugins/global/plugins.bundle.rtl.css" rel="stylesheet" type="text/css" />
+<link href="{{url('admin')}}/assets/css/style.bundle.rtl.css" rel="stylesheet" type="text/css" />
+<!--end::Global Stylesheets Bundle-->
+
 
 <link href="https://fonts.googleapis.com/css?family=Cairo&display=swap" rel="stylesheet">
+
 <style>
     * {
-        font-family: 'Cairo', sans-serif;
+        font-family: 'Cairo', sans-serif !important;
+        font-size: 15px;
     }
+    .btn{
+        font-size: 1.2rem !important;
+        border-radius: 7px!important;
+    }
+    @toastr_css
 </style>
 <!--end::Web font -->
 

@@ -33,6 +33,94 @@
         }
     });
 </script>
+<script>
+    @if (Session::has('message'))
+    var type = "{{ Session::get('alert-type', 'info') }}"
+    switch(type){
+        case 'info':
+            toastr.options.timeOut = 10000;
+            toastr.info("{{Session::get('message')}}");
+            var audio = new Audio('audio.mp3');
+            audio.play();
+            break;
+        case 'success':
+
+            toastr.options.timeOut = 10000;
+            toastr.success("{{Session::get('message')}}");
+            var audio = new Audio('music/Success 12.mp3');
+            audio.play();
+
+            break;
+        case 'warning':
+
+            toastr.options.timeOut = 10000;
+            toastr.warning("{{Session::get('message')}}");
+            var audio = new Audio('music/error2.mp3');
+            audio.play();
+
+            break;
+        case 'error':
+
+            toastr.options.timeOut = 10000;
+            toastr.error("{{Session::get('message')}}");
+            var audio = new Audio('audio.mp3');
+            audio.play();
+
+            break;
+    }
+    @endif
+</script>
+<script>
+    $(document).on('click','.delete_element',function (e) {
+        var id = $(this).attr('data_id')
+        // var td = $(this)
+        var routeAction = $(this).attr('data_delete')
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: 'btn btn-success',
+                cancelButton: 'btn btn-danger'
+            },
+            buttonsStyling: false
+        })
+
+        swalWithBootstrapButtons.fire({
+            title: 'هل انت متأكد من الحذف ؟',
+            text: "سيتم حذف المحدد!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'حذف !',
+            cancelButtonText: 'الغاء !',
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: 'POST',
+                    url: routeAction,
+                    data: {'id':id},
+                    success:function(data){
+                        // td.parent().parent().remove();
+                        swalWithBootstrapButtons.fire(
+                            'تم الحذف !',
+                            'تم حذف العنصر بنجاح .',
+                            'success'
+                        )
+                        setTimeout(function (){location.reload()},2000);
+                        // ajax().reload();
+                    }
+                });
+            } else if (
+                /* Read more about handling dismissals below */
+                result.dismiss === Swal.DismissReason.cancel
+            ) {
+                swalWithBootstrapButtons.fire(
+                    'تم الغاء الحذف ',
+                    'العنصر المحدد موجود بامان ',
+                    'error'
+                )
+            }
+        });
+    })
+</script>
 
 @stack('site_js')
 
@@ -67,19 +155,35 @@
 
 {{--==============================  Firebase  =====================================--}}
 <script src="https://www.gstatic.com/firebasejs/6.0.2/firebase.js"></script>
-<script>
-    var firebaseConfig = {
-        apiKey: "AIzaSyBg5ff6XTsIxW0KkiipBSeHXbjGYUUnmBk",
-        authDomain: "test-e434b.firebaseapp.com",
-        databaseURL: "https://test-e434b.firebaseapp.com",
-        projectId: "famous-84fc0",
-        storageBucket: "test-e434b.appspot.com",
-        messagingSenderId: "108177260",
-        appId: "1:877984876176:web:da91cdd947d2d27889fa15",
-        measurementId: "p266654231222"
-    };
+{{--<script>--}}
+{{--    var firebaseConfig = {--}}
+{{--        apiKey: "AIzaSyBg5ff6XTsIxW0KkiipBSeHXbjGYUUnmBk",--}}
+{{--        authDomain: "test-e434b.firebaseapp.com",--}}
+{{--        databaseURL: "https://test-e434b.firebaseapp.com",--}}
+{{--        projectId: "famous-84fc0",--}}
+{{--        storageBucket: "test-e434b.appspot.com",--}}
+{{--        messagingSenderId: "108177260",--}}
+{{--        appId: "1:877984876176:web:da91cdd947d2d27889fa15",--}}
+{{--        measurementId: "p266654231222"--}}
+{{--    };--}}
 
+{{--    firebase.initializeApp(firebaseConfig);--}}
+{{--</script>--}}
+<script>
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    var firebaseConfig = {
+        apiKey: "AIzaSyA-gj4Cje-NjRUtysAFaNZDdR7VKfdkLL0",
+        authDomain: "famous-5f5fc.firebaseapp.com",
+        projectId: "famous-5f5fc",
+        storageBucket: "famous-5f5fc.appspot.com",
+        messagingSenderId: "1084986292087",
+        appId: "1:1084986292087:web:ed81a7aae062168bd81372",
+        measurementId: "G-6D6NPKZ5Z6"
+    };
+    // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
 </script>
 <script type="text/javascript">
     window.onload=function () {

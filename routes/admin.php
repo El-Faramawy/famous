@@ -3,110 +3,128 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-// Route::group(
-// [
-// 	'prefix' => LaravelLocalization::setLocale(),
-// 	'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
-// ], function(){
-//
 
 
 
 Route::group(['prefix' => 'admin'], function () {
-
-//    Config::set('auth.defines', 'admin');
-    //app()->setLocale('ar');
-
-    Route::get('login',function (){
-        if (Auth::guard('admin')->check()){
-        return redirect('admin/home');
-    }
-            return view('Admin/auth/login');
-});
-    Route::post('do-log','AuthController@login')->name('do-log');
-    /**
-     *
-     *
-     * Auth System of Driver
-     *
-     *
-     */
-
-    /*  Route::post('login', 'DriverAuthController@doLogin')->name('driveLoginAction');
-      Route::get('forgot/password', 'DriverAuthController@forgot_password')->name('driveForgetPasswordView');
-      Route::post('forgot/password', 'DriverAuthController@forgot_password_post')->name('driveForgetPasswordAction');
-      Route::get('reset/password/{token}', 'DriverAuthController@reset_password')->name('driveResetPasswordView');
-      Route::post('reset/password/{token}', 'DriverAuthController@reset_password_final')->name('driveResetPasswordAction');*/
-
+    Route::get('login', function () {
+        if (Auth::guard('admin')->check()) {
+            return redirect('admin/home');
+        }
+        return view('Admin/auth/login');
+    });
+    Route::post('do-log', 'AuthController@login')->name('do-log');
 
 
     //******* after login *******
     Route::group(['middleware' => 'admin:admin'], function () {
 
-        Route::get('log-out','AuthController@logout')->name('log-out');
+        Route::get('log-out', 'AuthController@logout')->name('log-out');
 
-        Route::get('/',function (){
+        Route::get('/', function () {
             return redirect('admin/home');
         })->name('/');
-        Route::get('home',function (){return view('Admin/home');})->name('home');
-
-//        ======================================== Admin ====================================
-        Route::get('show-admins','AdminController@get')->name('show-admins');
-        Route::get('add-admin',function (){return view('Admin/Admin/create');})->name('add-admin');
-        Route::post('store.admin','AdminController@store_admin')->name('store.admin');
-        Route::post('admin_delete','AdminController@admin_delete')->name('admin_delete');
-        Route::post('admin_edit','AdminController@admin_edit')->name('admin_edit');
-        Route::post('admin_check.delete','AdminController@admin_check_delete')->name('admin_check.delete');
-        Route::post('store.admin_update','AdminController@store_admin_update')->name('store.admin_update');
-
-        Route::get('my_profile','AdminController@my_profile')->name('my_profile');
-        Route::post('store-profile','AdminController@save_profile')->name('store-profile');
+        Route::get('home', 'HomeController@index')->name('home');
+        Route::post('design_delete', 'HomeController@design_delete')->name('design_delete');
 
 
-//        //        ============================  packages  ==========================================================
-//        Route::get('/packages/{id}','Package_Controller@index')->name('packages');
-//        Route::post('/add_package','Package_Controller@add_package')->name('add_package');
-//        Route::post('/edit_package/{id}','Package_Controller@edit_package')->name('edit_package');
-//        Route::post('/delete_package','Package_Controller@delete_package')->name('delete_package');
-//        Route::post('/multi_delete_package','Package_Controller@multi_delete_package')->name('multi_delete_package');
-//
-//        //        ============================  languages  ==========================================================
-//        Route::get('/languages','Language_Controller@index')->name('languages');
-//        Route::post('/add_language','Language_Controller@add_language')->name('add_language');
-//        Route::post('/edit_language/{id}','Language_Controller@edit_language')->name('edit_language');
-//        Route::post('/delete_language','Language_Controller@delete_language')->name('delete_language');
-//        Route::post('/multi_delete_language','Language_Controller@multi_delete_language')->name('multi_delete_language');
-//
-//        //        ============================  platforms  ==========================================================
-//        Route::get('/platforms','Platform_Controller@index')->name('platforms');
-//        Route::post('/add_platform','Platform_Controller@add_platform')->name('add_platform');
-//        Route::post('/edit_platform/{id}','Platform_Controller@edit_platform')->name('edit_platform');
-//        Route::post('/delete_platform','Platform_Controller@delete_platform')->name('delete_platform');
-//        Route::post('/multi_delete_platform','Platform_Controller@multi_delete_platform')->name('multi_delete_platform');
-//
-//        //        ============================  game_types  ==========================================================
-//        Route::get('/game_types','Game_type_Controller@index')->name('game_types');
-//        Route::post('/add_game_type','Game_type_Controller@add_game_type')->name('add_game_type');
-//        Route::post('/edit_game_type/{id}','Game_type_Controller@edit_game_type')->name('edit_game_type');
-//        Route::post('/delete_game_type','Game_type_Controller@delete_game_type')->name('delete_game_type');
-//        Route::post('/multi_delete_game_type','Game_type_Controller@multi_delete_game_type')->name('multi_delete_game_type');
-//
-//        //        ============================  areas  ==========================================================
-//        Route::get('/areas','Area_Controller@index')->name('areas');
-//        Route::post('/add_area','Area_Controller@add_area')->name('add_area');
-//        Route::post('/edit_area/{id}','Area_Controller@edit_area')->name('edit_area');
-//        Route::post('/delete_area','Area_Controller@delete_area')->name('delete_area');
-//        Route::post('/multi_delete_area','Area_Controller@multi_delete_area')->name('multi_delete_area');
-//
-//        //        ========================================= slider ===============================
-//        Route::get('slider','Slider_Controller@index')->name('slider');
-//        Route::post('add_slider','Slider_Controller@add_slider')->name('add_slider');
-//        Route::post('delete_image','Slider_Controller@delete_image')->name('delete_image');
-//        Route::post('edit_image/{id}','Slider_Controller@edit_image')->name('edit_image');
-//        Route::post('multi_delete_image','Slider_Controller@multi_delete_image')->name('multi_delete_image');
+        ###################### Admin ##########################
+        Route::get('show-admins', 'AdminController@get')->name('show-admins');
+        Route::get('add-admin', function () {
+            return view('Admin/Admin/create');
+        })->name('add-admin');
+        Route::post('store.admin', 'AdminController@store_admin')->name('store.admin');
+        Route::post('admin_delete', 'AdminController@admin_delete')->name('admin_delete');
+        Route::get('admin_edit/{id}', 'AdminController@admin_edit')->name('admin_edit');
+        Route::post('admin_check.delete', 'AdminController@admin_check_delete')->name('admin_check.delete');
+        Route::post('store.admin_update', 'AdminController@store_admin_update')->name('store.admin_update');
+        Route::get('my_profile', 'AdminController@my_profile')->name('my_profile');
+        Route::post('store-profile', 'AdminController@save_profile')->name('store-profile');
 
 
-    });//end Middleware Admin
+        ###################### Famous ##########################
+        Route::get('famous', [\App\Http\Controllers\Admin\FamousController::class, 'index'])->name('famous');
+        Route::post('edit_famous', [\App\Http\Controllers\Admin\FamousController::class, 'update'])->name('edit_famous');
+        Route::post('delete_one_famous', [\App\Http\Controllers\Admin\FamousController::class, 'delete_one'])->name('delete_one_famous');
+        Route::post('delete_all_famous', [\App\Http\Controllers\Admin\FamousController::class, 'delete_all'])->name('delete_all_famous');
+        ## VIP famous ##
+        Route::get('VIPFamous', [\App\Http\Controllers\Admin\FamousController::class, 'VIP'])->name('VIPFamous');
+        Route::post('deactivate_one_famous', [\App\Http\Controllers\Admin\FamousController::class, 'deactivate_one_famous'])->name('deactivate_one_famous');
+        Route::post('deactivate_all_famous', [\App\Http\Controllers\Admin\FamousController::class, 'deactivate_all_famous'])->name('deactivate_all_famous');
+        ## new famous ##
+        Route::get('newFamous', [\App\Http\Controllers\Admin\FamousController::class, 'newFamous'])->name('newFamous');
+        Route::post('allow_all_famous', [\App\Http\Controllers\Admin\FamousController::class, 'allow_all_famous'])->name('allow_all_famous');
+        Route::post('accept_one_famous', [\App\Http\Controllers\Admin\FamousController::class, 'accept_one_famous'])->name('accept_one_famous');
+
+        ## package ##
+        Route::post('remove_package', [\App\Http\Controllers\Admin\FamousController::class, 'remove_package'])->name('remove_package');
+
+
+
+        ###################### Clients ##########################
+        Route::get('clients', [\App\Http\Controllers\Admin\ClientController::class, 'index'])->name('clients');
+        Route::post('delete_one_client', [\App\Http\Controllers\Admin\ClientController::class, 'delete_one'])->name('delete_one_client');
+        Route::post('delete_all_clients', [\App\Http\Controllers\Admin\ClientController::class, 'delete_all'])->name('delete_all_clients');
+
+        ###################### Jobs ##########################
+        Route::get('jobs', [\App\Http\Controllers\Admin\JobsClient::class, 'index'])->name('jobs');
+        Route::post('add_job', [\App\Http\Controllers\Admin\JobsClient::class, 'create'])->name('add_job');
+        Route::post('update_job', [\App\Http\Controllers\Admin\JobsClient::class, 'update'])->name('update_job');
+        Route::post('delete_job', [\App\Http\Controllers\Admin\JobsClient::class, 'delete_one'])->name('delete_job');
+
+
+        ###################### Sliders ##########################
+        Route::get('slider',[\App\Http\Controllers\Admin\SliderController::class,'index'])->name('sliders');
+        Route::post('create_slider',[\App\Http\Controllers\Admin\SliderController::class,'create'])->name('create_slider');
+        Route::post('update_slider',[\App\Http\Controllers\Admin\SliderController::class,'update'])->name('update_slider');
+        Route::post('delete_one_slider',[\App\Http\Controllers\Admin\SliderController::class,'delete_one'])->name('delete_slider');
+        Route::post('delete_all_sliders',[\App\Http\Controllers\Admin\SliderController::class,'delete_all'])->name('delete_all_sliders');
+
+
+        ###################### Sliders ##########################
+        Route::get('info',[\App\Http\Controllers\Admin\InfoController::class,'index'])->name('info');
+        Route::post('edit_info',[\App\Http\Controllers\Admin\InfoController::class,'update'])->name('edit_info');
+
+        ###################### About ##########################
+        Route::get('about_us',[\App\Http\Controllers\Admin\AboutController::class,'index'])->name('about_us');
+        Route::post('create_about',[\App\Http\Controllers\Admin\AboutController::class,'create'])->name('create_about');
+        Route::post('update_about',[\App\Http\Controllers\Admin\AboutController::class,'update'])->name('update_about');
+        Route::post('delete_one_about',[\App\Http\Controllers\Admin\AboutController::class,'delete_one'])->name('delete_about');
+        Route::post('delete_all_about',[\App\Http\Controllers\Admin\AboutController::class,'delete_all'])->name('delete_all_abouts');
+
+
+        ###################### Rating ##########################
+        Route::get('rates',[\App\Http\Controllers\Admin\RateController::class,'index'])->name('rates');
+        Route::post('delete_rate',[\App\Http\Controllers\Admin\RateController::class,'delete'])->name('delete_rate');
+
+
+        ###################### counter ##########################
+        Route::get('counter',[\App\Http\Controllers\Admin\CounterController::class,'index'])->name('counter');
+        Route::post('create_counter',[\App\Http\Controllers\Admin\CounterController::class,'create'])->name('create_counter');
+        Route::post('delete_one_counter',[\App\Http\Controllers\Admin\CounterController::class,'delete_one'])->name('delete_one_counter');
+        Route::post('delete_all_counter',[\App\Http\Controllers\Admin\CounterController::class,'delete_all'])->name('delete_all_counter');
+        Route::post('update_counter',[\App\Http\Controllers\Admin\CounterController::class,'update'])->name('update_counter');
+
+        ###################### offers ##########################
+        Route::get('offers',[\App\Http\Controllers\Admin\OfferController::class,'index'])->name('offers');
+        Route::post('delete_all_offers',[\App\Http\Controllers\Admin\OfferController::class,'delete_all'])->name('delete_all_offers');
+        Route::post('delete_one_offers',[\App\Http\Controllers\Admin\OfferController::class,'delete_one'])->name('delete_one_offers');
+
+        ###################### packages ##########################
+        Route::get('packages',[\App\Http\Controllers\Admin\packageController::class,'index'])->name('packages');
+
+        ###################### ADS ##########################
+        Route::get('ADS',[\App\Http\Controllers\Admin\AdsController::class,'index'])->name('ADS');
+
+        ###################### Previous-ads ##########################
+        Route::get('Previous-ads',[\App\Http\Controllers\Admin\PrevAdsController::class,'index'])->name('Previous-ads');
+
+
+
+    });
+
+
+
 
 
 });//end Prefix

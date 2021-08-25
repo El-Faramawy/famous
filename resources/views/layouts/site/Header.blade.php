@@ -22,11 +22,17 @@
                 <!-- <li class="nav-item">
                     <a class="nav-link" href="terms.html">الشروط والاحكام</a>
                 </li> -->
+                @if(auth()->check())
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{url('profile',auth()->user()->id)}}"> حسابي </a>
+                    </li>
+                @endif
                 <li class="nav-item">
-                    <a class="nav-link" href="{{url('profile')}}"> حسابي </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{url('login')}}">تسجيل الدخول</a>
+                    @if(auth()->check())
+                        <a class="nav-link" href="{{url('logout')}}">تسجيل الخروج</a>
+                    @else
+                        <a class="nav-link" href="{{url('login')}}">تسجيل الدخول</a>
+                    @endif
                 </li>
             </ul>
         </div>

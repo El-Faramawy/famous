@@ -29,9 +29,6 @@ Route::get('contact', function () {
     return view('Site/contact');
 });
 
-Route::get('profile-edit', function () {
-    return view('Site/profile-edit');
-});
 Route::get('profile-Notifications', function () {
     return view('Site/profile-Notifications');
 });
@@ -66,13 +63,25 @@ Route::post('check_phone', 'Site\UserController@check_phone')->name('check_phone
 Route::post('check_phone_login', 'Site\UserController@check_phone_login')->name('check_phone_login');
 
 //===============================================================================================
-Route::get('profile/{id}','Site\Profile@index');
+Route::get('profile/{id}','Site\ProfileController@index');
 //Route::get('confirm_code/{id}', 'Site\UserController@confirm_code')->name('confirm_code');
 
 //Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => 'user:user'], function () {
+    Route::get('logout','Site\UserController@logout');
 
+    Route::get('profile-edit/{id}','Site\ProfileController@profile_edit');
+    Route::post('edit_profile', 'Site\ProfileController@edit_profile')->name('edit_profile');
+
+    Route::post('edit_cv','Site\ProfileController@edit_cv')->name('edit_cv');
+    Route::post('store_package','Site\ProfileController@store_package')->name('store_package');
+    Route::post('store_ad','Site\ProfileController@store_ad')->name('store_ad');
+    Route::post('delete_package','Site\ProfileController@delete_package')->name('delete_package');
+
+
+//    Route::post('/storedata', 'ProfileController@storeData')->name('form.data');
+//    Route::post('/storeimgae', 'ProfileController@storeImage');
 });
 
 require __DIR__.'/ali.php';

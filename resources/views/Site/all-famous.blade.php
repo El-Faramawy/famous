@@ -8,60 +8,17 @@
           <div class="famousVIPSlider">
             <div class="swiper-container ">
               <div class="swiper-wrapper">
-                <div class="swiper-slide p-2">
-                  <a href="{{url('profile')}}" class=" famous vip">
-                    <img src="{{url('site')}}/img/Users/14.jpg">
-                    <div class="info">
-                      <p> طلال خالد </p>
-                      <span> فنان </span>
+                   @foreach($vip_famous as $vip_fam)
+                          <div class="swiper-slide p-2">
+                            <a href="{{url('profile')}}" class=" famous vip">
+                             <img src="{{asset('uploads/famous/'. $vip_fam->image)}}">
+                          <div class="info">
+                          <p> {{$vip_fam->name}} </p>
+                          <span> {{$vip_fam->job->title}} </span>
+                        </div>
+                      </a>
                     </div>
-                  </a>
-                </div>
-                <div class="swiper-slide p-2">
-                  <a href="{{url('profile')}}" class=" famous vip">
-                    <img src="{{url('site')}}/img/Users/15.jpg">
-                    <div class="info">
-                      <p> سلطان بندر </p>
-                      <span> يوتيوبر </span>
-                    </div>
-                  </a>
-                </div>
-                <div class="swiper-slide p-2">
-                  <a href="{{url('profile')}}" class=" famous vip">
-                    <img src="{{url('site')}}/img/Users/16.jpg">
-                    <div class="info">
-                      <p>خالد سلطان </p>
-                      <span> فنان </span>
-                    </div>
-                  </a>
-                </div>
-                <div class="swiper-slide p-2">
-                  <a href="{{url('profile')}}" class=" famous vip">
-                    <img src="{{url('site')}}/img/Users/12.jpg">
-                    <div class="info">
-                      <p> راكان ال حمد </p>
-                      <span> استريمر </span>
-                    </div>
-                  </a>
-                </div>
-                <div class="swiper-slide p-2">
-                  <a href="{{url('profile')}}" class=" famous vip">
-                    <img src="{{url('site')}}/img/Users/8.jpg">
-                    <div class="info">
-                      <p> بندر ال تركي </p>
-                      <span> مذيع </span>
-                    </div>
-                  </a>
-                </div>
-                <div class="swiper-slide p-2">
-                  <a href="{{url('profile')}}" class=" famous vip">
-                    <img src="{{url('site')}}/img/Users/6.jpg">
-                    <div class="info">
-                      <p> وليد سعود </p>
-                      <span> فنان </span>
-                    </div>
-                  </a>
-                </div>
+                   @endforeach
               </div>
             </div>
             <!-- Add Arrows -->
@@ -83,6 +40,7 @@
                   </form>
                 </div>
 
+                <div class="filter ">
                 <div class="filter ">
                   <div class="FilterHeder">
                     <h5> تصفية النتائج :</h5>
@@ -122,134 +80,40 @@
                     <button type="submit" class=" btn  filterPtn btn-success btn-block py-3 "> تصفية </button>
                   </form>
                 </div>
+
+
               </aside>
+
             </div>
             <div class="col-lg-9 p-1">
               <div class="products-filter-options">
                 <div class="row align-items-center justify-content-between">
                   <div class="col-md-4">
-                    <p>اظهار 1 – 12 من 100</p>
+                    <p> اظهار  {{$famous_counter_accepted}}  من  {{$famous_counter_all}}</p>
                   </div>
                   <div class="col-md-4">
                     <div class="form-group position-relative">
-                      <select class=" select2 form-control ">
-                        <option selected disabled> ترتيب حسب </option>
-                        <option> التقييم </option>
-                        <option>الاحدث </option>
-                      </select>
+                        <select class=" select2 form-control ">
+                            <option selected disabled> ترتيب حسب </option>
+                            <option> التقييم </option>
+                            <option>الاحدث </option>
+                        </select>
                     </div>
                   </div>
                 </div>
               </div>
               <div class="row position-relative">
-                <div class="col-6 col-md-4 p-2 ">
+               @foreach($all_famous as $all_fam)
+                      <div class="col-6 col-md-4 p-2 ">
                   <a href="{{url('profile')}}" class=" famous">
-                    <img src="{{url('site')}}/img/Users/14.jpg">
+                      <img src="{{asset('uploads/famous/'. $all_fam->image)}}">
                     <div class="info">
-                      <p> طلال خالد </p>
-                      <span> فنان </span>
+                      <p> {{$all_fam->name}} </p>
+                      <span> {{$all_fam->job->title}} </span>
                     </div>
                   </a>
                 </div>
-                <div class="col-6 col-md-4 p-2 ">
-                  <a href="{{url('profile')}}" class=" famous">
-                    <img src="{{url('site')}}/img/Users/15.jpg">
-                    <div class="info">
-                      <p> سلطان بندر </p>
-                      <span> يوتيوبر </span>
-                    </div>
-                  </a>
-                </div>
-                <div class="col-6 col-md-4 p-2 ">
-                  <a href="{{url('profile')}}" class=" famous">
-                    <img src="{{url('site')}}/img/Users/16.jpg">
-                    <div class="info">
-                      <p>خالد سلطان </p>
-                      <span> فنان </span>
-                    </div>
-                  </a>
-                </div>
-                <div class="col-6 col-md-4 p-2 ">
-                  <a href="{{url('profile')}}" class=" famous vip">
-                    <img src="{{url('site')}}/img/Users/12.jpg">
-                    <div class="info">
-                      <p> راكان ال حمد </p>
-                      <span> استريمر </span>
-                    </div>
-                  </a>
-                </div>
-                <div class="col-6 col-md-4 p-2 ">
-                  <a href="{{url('profile')}}" class=" famous">
-                    <img src="{{url('site')}}/img/Users/8.jpg">
-                    <div class="info">
-                      <p> بندر ال تركي </p>
-                      <span> مذيع </span>
-                    </div>
-                  </a>
-                </div>
-                <div class="col-6 col-md-4 p-2 ">
-                  <a href="{{url('profile')}}" class=" famous">
-                    <img src="{{url('site')}}/img/Users/6.jpg">
-                    <div class="info">
-                      <p> وليد سعود </p>
-                      <span> فنان </span>
-                    </div>
-                  </a>
-                </div>
-                <div class="col-6 col-md-4 p-2 ">
-                  <a href="{{url('profile')}}" class=" famous">
-                    <img src="{{url('site')}}/img/Users/14.jpg">
-                    <div class="info">
-                      <p> طلال خالد </p>
-                      <span> فنان </span>
-                    </div>
-                  </a>
-                </div>
-                <div class="col-6 col-md-4 p-2 ">
-                  <a href="{{url('profile')}}" class=" famous">
-                    <img src="{{url('site')}}/img/Users/15.jpg">
-                    <div class="info">
-                      <p> سلطان بندر </p>
-                      <span> يوتيوبر </span>
-                    </div>
-                  </a>
-                </div>
-                <div class="col-6 col-md-4 p-2 ">
-                  <a href="{{url('profile')}}" class=" famous">
-                    <img src="{{url('site')}}/img/Users/16.jpg">
-                    <div class="info">
-                      <p>خالد سلطان </p>
-                      <span> فنان </span>
-                    </div>
-                  </a>
-                </div>
-                <div class="col-6 col-md-4 p-2 ">
-                  <a href="{{url('profile')}}" class=" famous">
-                    <img src="{{url('site')}}/img/Users/12.jpg">
-                    <div class="info">
-                      <p> راكان ال حمد </p>
-                      <span> استريمر </span>
-                    </div>
-                  </a>
-                </div>
-                <div class="col-6 col-md-4 p-2 ">
-                  <a href="{{url('profile')}}" class=" famous">
-                    <img src="{{url('site')}}/img/Users/8.jpg">
-                    <div class="info">
-                      <p> بندر ال تركي </p>
-                      <span> مذيع </span>
-                    </div>
-                  </a>
-                </div>
-                <div class="col-6 col-md-4 p-2 ">
-                  <a href="{{url('profile')}}" class=" famous">
-                    <img src="{{url('site')}}/img/Users/6.jpg">
-                    <div class="info">
-                      <p> وليد سعود </p>
-                      <span> فنان </span>
-                    </div>
-                  </a>
-                </div>
+              @endforeach
 
                 <!-- Loading -->
                 <!-- <div class="loading" data-toggle="tooltip" title=" يتم التحميل  ">
@@ -290,3 +154,4 @@
 
   </content>
 @endsection
+
