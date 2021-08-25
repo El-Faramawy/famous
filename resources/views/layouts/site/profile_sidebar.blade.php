@@ -13,7 +13,7 @@
             <a href="{{url('profile-Notifications')}}"> <i class="fas fa-bell me-2"></i> الاشعارات </a>
             @if(auth()->check())
                 @if(auth()->user()->id == $user->id)
-                    <a href="{{url('profile-edit',$user->id)}}"><i class="fas fa-cog me-2"></i> تعديل </a>
+                    <a href="{{url('profile-edit')}}"><i class="fas fa-cog me-2"></i> تعديل </a>
                     <a href="{{url('logout')}}"><i class="fas fa-sign-out-alt me-2"></i> خروج </a>
                 @endif
             @endif

@@ -71,8 +71,9 @@ Route::get('profile/{id}','Site\ProfileController@index');
 Route::group(['middleware' => 'user:user'], function () {
     Route::get('logout','Site\UserController@logout');
 
-    Route::get('profile-edit/{id}','Site\ProfileController@profile_edit');
+    Route::get('profile-edit','Site\ProfileController@profile_edit');
     Route::post('edit_profile', 'Site\ProfileController@edit_profile')->name('edit_profile');
+//    Route::post('update_user', 'Site\ProfileController@update_user')->name('update_user');
 
     Route::post('edit_cv','Site\ProfileController@edit_cv')->name('edit_cv');
     Route::post('store_package','Site\ProfileController@store_package')->name('store_package');

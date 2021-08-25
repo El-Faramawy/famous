@@ -102,59 +102,70 @@ class ProfileController extends Controller
         return redirect()->back();
     }
     //============================================================================
-    public function profile_edit($id){
-        $user = User::where('id',$id)->first();
-        $visitor_count = Visitor::where('famous_id',$id)->count();
+    public function profile_edit()
+    {
+        $user = User::where('id', auth()->user()->id)->first();
+        $visitor_count = Visitor::where('famous_id', auth()->user()->id)->count();
         $jobs = Jop::all();
-        return view('Site/profile-edit',compact('user','visitor_count','jobs'));
+        if (auth()->user()->type == 'famous')
+            return view('Site/profile-edit', compact('user', 'visitor_count', 'jobs'));
+        else
+            return view('Site/profile-client-edit', compact('user', 'visitor_count', 'jobs'));
     }
     //============================================================================
-    public function edit_profile(Request $request){
-        $user = User::where('id',$request->id)->first();
+    public function edit_profile(Request $request)
+    {
+        $user = User::where('id', $request->id)->first();
         $message = [];
         $validator = Validator::make($request->all(), [ // <---
             'phone' => ['required'],
         ]);
-        $validator->fails()? $message[] = 'رقم الهاتف مطلوب ':'';
-        $validator = Validator::make($request->all(), [ // <---
-            'image' => ['required'],
-        ]);
-        $validator->fails()? $message[] = 'الصورة مطلوبة ':'';
+        $validator->fails() ? $message[] = 'رقم الهاتف مطلوب ' : '';
+        if ($request->image) {
+            $validator = Validator::make($request->all(), [ // <---
+                'image' => ['required'],
+            ]);
+            $validator->fails() ? $message[] = 'الصورة مطلوبة ' : '';
+        }
 
-        if ($user->type == 'famous'){
+        if ($user->type == 'famous') {
             $validator = Validator::make($request->all(), [ // <---
                 'name' => ['required'],
             ]);
-            $validator->fails()? $message[] = 'الاسم مطلوب ':'';
+            $validator->fails() ? $message[] = 'الاسم مطلوب ' : '';
             $validator = Validator::make($request->all(), [ // <---
                 'job_id' => ['required'],
             ]);
-            $validator->fails()? $message[] = 'التصنيف مطلوب ':'';
-        }else{
+            $validator->fails() ? $message[] = 'التصنيف مطلوب ' : '';
+        } else {
             $validator = Validator::make($request->all(), [ // <---
                 'company_name' => ['required'],
             ]);
-            $validator->fails()? $message[] = 'اسم الشركة مطلوب ':'';
+            $validator->fails() ? $message[] = 'اسم الشركة مطلوب ' : '';
             $validator = Validator::make($request->all(), [ // <---
                 'company_person' => ['required'],
             ]);
-            $validator->fails()? $message[] = 'الشخص المسئول مطلوب ':'';
+            $validator->fails() ? $message[] = 'الشخص المسئول مطلوب ' : '';
             $validator = Validator::make($request->all(), [ // <---
                 'company_email' => ['required'],
             ]);
-            $validator->fails()? $message[] = 'ايميل الشركة مطلوب ':'';
+            $validator->fails() ? $message[] = 'ايميل الشركة مطلوب ' : '';
         }
-
-        if ($message != []){
-            return response()->json([ 'message' => $message, 'type' => 'error']);
-
-        }else{
-            $data = $request->all();
-            if (isset($request->image))
-                $data->image  = upload_image('client','image');
-            $user->update($data);
-            return response()->json([ 'type' => 'success']);
+        if ($user->phone != $request->phone) {
+            $validator = Validator::make($request->all(), [ // <---
+                'phone' => ['unique:users'],
+            ]);
+            $validator->fails() ? $message[] = ' رقم الهاتف موجود مسبقا ' : '';
         }
+        if ($message != []) {
+            return response()->json(['message' => $message, 'type' => 'error']);
+
+        }
+        $data = $request->all();
+        if (isset($request->image) && $request->image != '')
+            $data['image'] = upload_image('client', 'image');
+        $user->update($data);
+        return response()->json(['type' => 'success']);
     }
 
 }

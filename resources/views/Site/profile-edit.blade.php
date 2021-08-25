@@ -25,7 +25,7 @@
                         </div>
                       </div>
                     </div>
-                    <form  method="post"  action="{{route('register_user')}}" id="Form" class="needs-validation" novalidate>
+                    <form  method="post"  {{--action="{{route('update_user')}}"--}} id="Form" >
                         @csrf
                         <input type="hidden" name="id" value="{{$user->id}}">
                       <!--  Step 1 -->
@@ -35,24 +35,24 @@
                           <div class=" col-md-12 d-flex align-items-center p-1">
                             <div class="row">
                               <div class="col-md-12 p-2">
-                                <input name="image" type="file" class="dropify" data-default-file="{{get_file($user->image)}}" data-toggle="tooltip" title=" الصورة الشخصية " required/>
+                                <input name="image" type="file" class="dropify" data-default-file="{{get_file($user->image)}}" data-toggle="tooltip" title=" الصورة الشخصية " />
                               </div>
                               <div class="col-md-6 p-2">
                                 <div class="form-outline ">
-                                  <input value="{{$user->name}}" name="name" type="text" class="form-control" required/>
+                                  <input value="{{$user->name}}" name="name" type="text" class="form-control" />
                                   <label class="form-label"> اسم المشهور </label>
                                 </div>
                               </div>
 
                               <div class="col-md-6 p-2">
                                 <div class="form-outline ">
-                                    <input value="{{$user->phone}}" id="phone" name="phone" type="text" class="form-control numbersOnly" required/>
+                                    <input value="{{$user->phone}}" id="phone" name="phone" type="text" class="form-control numbersOnly" />
                                     <label class="form-label"> رقم الهاتف </label>
                                 </div>
                               </div>
                               <div class="col-md-12 p-2">
                                 <div class="form-group position-relative">
-                                    <select class=" select2 " name="job_id" required>
+                                    <select class=" select2 " name="job_id" >
                                         <option  disabled> التصنيف </option>
                                         @foreach($jobs as $job)
                                             <option {{$job->id == $user->job_id?'selected':''}} value="{{$job->id}}"> {{$job->title}} </option>
