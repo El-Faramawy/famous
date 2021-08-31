@@ -3,18 +3,43 @@
 namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
+use App\Models\Jop;
 use App\User;
 use Illuminate\Http\Request;
 
 class AllfamousContrroller extends Controller
 {
-    public function index(){
+    public function index(Request $request){
 
-        $vip_famous=user::all()->where('is_favorite', 'yes')->take(8);
-        $famous_counter_accepted=user::all()->where('status', 'accepted')->count();
-        $famous_counter_all=user::all()->count();
-        $all_famous=user::orderBy('created_at', 'DESC')->get()->where('status', 'accepted');
-        return view('site.all-famous' , compact('vip_famous' ,'all_famous','famous_counter_accepted', 'famous_counter_all'));
+        $vip_famous=user::where([['type' , 'famous'] , ['is_favorite' , 'yes'] ,[ 'status' ,'accepted']])->get();
+        $famous=user::where(['status'=>'accepted','type'=>'famous'])->orderBy('date', 'DESC')->get();
+        $all_famous_count=user::where(['status'=>'accepted','type'=>'famous'])->count();
+        $jobs = Jop::whereHas('famous')->get();
+        if ($request->ajax()) {
+            $job_data = $request->job? preg_split("/[,]/", $request->job):null;
+
+            $job = Jop::pluck('id')->toArray();
+            if (is_array($job_data) && !in_array('all', $job_data) ) {
+                $job = Jop::whereIn('id', $job_data)->pluck('id')->toArray();
+            } else {
+                $job = Jop::pluck('id')->toArray();
+            }
+            $order = $request->order == 'rate'?'rate':'date';
+            $search = $request->search;
+            if ($search == null){
+                $famous=user::whereIn('job_id',$job)
+                    ->where(['status'=>'accepted','type'=>'famous'])
+                    ->orderBy($order, 'DESC')->get();
+            }else{
+                $famous=user::whereIn('job_id',$job)
+                    ->where(['status'=>'accepted','type'=>'famous',['name','like','%'.$search.'%']])
+                    ->orderBy($order, 'DESC')->get();
+            }
+            $html = view('Site.parts.famous_search' , compact('vip_famous' ,'famous','all_famous_count','jobs'))->render();
+            return response()->json(['html'=>$html,'type'=>'success']);
+        }
+//        $all_famous=user::orderBy('created_at', 'DESC')->where([['type' , 'famous'] ,[ 'status' ,'accepted']])->get();
+        return view('Site.all-famous' , compact('vip_famous' ,'famous','all_famous_count','jobs'));
 
     }
 

@@ -6,6 +6,17 @@
 <br>
 <br>
 <br>
+<br>
+@if($rates->count() == 0)
+    <div class="pt-lg-10">
+        <!--begin::Logo-->
+        <h2 class="fw-bolder text-gray-700 mb-10">لا يوجد اي مراجعات حتي الان</h2>
+        <!--end::Logo-->
+        <!--begin::Message-->
+        <div class="fw-bold fs-3 text-gray-400 mb-15">انتظر حتي يتم اضافة تقييم لمشهور</div>
+        <!--end::Message-->
+    </div>
+@endif
 <div class="mt-10 row">
     @foreach($rates as $rate)
     <div class="col-xl-6">
@@ -18,7 +29,7 @@
                     <div class="d-flex align-items-center flex-grow-1">
                     <!--begin::Avatar-->
                         <div class="symbol symbol-45px me-5">
-                            <img  alt="" onclick="window.open(this.src)" style='cursor: pointer' src={{asset('/uploads/clients/'.\App\User::where('id',$rate->user_id)->first()->image)}}>
+                            <img  alt="" onclick="window.open(this.src)" style='cursor: pointer' src={{asset(\App\User::where('id',$rate->user_id)->first()->image)}}>
                         </div>
                     <!--end::Avatar-->
                     <!--begin::Info-->
@@ -39,10 +50,10 @@
                 <!--begin::Toolbar-->
                 <div class="d-flex align-items-center mb-1">
                     <span>
-                        @for($i = 1 ; $i <= $rate->rate/20 ; $i++)
+                        @for($i = 1 ; $i <= $rate->rate ; $i++)
                              <i class="bi bi-star-fill" style="color: #FFD700" aria-hidden="true"></i>
                         @endfor
-                        @for($i = 1 ; $i <= 5 - $rate->rate/20 ; $i++)
+                        @for($i = 1 ; $i <= 5 - $rate->rate ; $i++)
                              <i class="bi bi-star" style="color: #FFD700" aria-hidden="true"></i>
                         @endfor
                     </span>
@@ -56,7 +67,7 @@
             <div class="mb-2 text-right">
                 <button data-id="{{$rate->id}}" data-comment="{{$rate->comment}}" data-bs-target="#delete_rate" title="حذف" class="btn btn-icon btn-danger btn-sm me-1" data-bs-toggle="modal" style="border-radius: 50% !important">
                             <span class="svg-icon svg-icon-3">
-                                <i class="bi bi-trash"></i>
+                                <i class="fa fa-trash"></i>
                             </span>
                 </button>
             </div>

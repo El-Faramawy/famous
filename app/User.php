@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\AdImage;
 use App\Models\Ads;
 use App\Models\Jop;
 use App\Models\Package;
@@ -46,6 +47,7 @@ class User extends Authenticatable
     public function ads(){
         return $this->hasMany(Ads::class,'user_id');
     }
+
     public function package(){
         return $this->hasMany(Package::class,'famous_id');
     }
@@ -55,4 +57,11 @@ class User extends Authenticatable
     public function rating(){
         return $this->hasMany(Rating::class,'famous_id');
     }
+
+    public function ali(){
+    return $this->hasOne(Ads::class, 'user_id');    }
+
+    public function notification(){
+    return $this->hasOne(User::class, 'client_id');    }
+
 }

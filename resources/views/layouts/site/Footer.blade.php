@@ -11,7 +11,7 @@ $setting = \App\Models\Setting::first();
                 <div class="col-md-3 col-6">
                     <div class="footer-widget">
                         <div class="logo">
-                            <a c href="#!"><img src="{{url('site')}}/img/logo.png"></a>
+                            <a href="{{url('/')}}"><img src="{{url('site')}}/img/logo.png"></a>
                         </div>
 
                     </div>
@@ -21,17 +21,17 @@ $setting = \App\Models\Setting::first();
                         <h4 class="footer-title">منصة صيت المشاهير</h4>
                         <ul class="widget-info">
                             <li>
-                                <p> <i class="fas fa-envelope"></i> <a href="#!">{{$setting->gmail}}</a> </p>
+                                <p> <i class="fas fa-envelope"></i> <a href="{{$setting->email}}">{{$setting->email}}</a> </p>
                             </li>
                             <li>
-                                <p> <i class="fa fa-phone"></i> <a href="#!">{{$setting->phone}}</a> </p>
+                                <p> <i class="fa fa-phone"></i> <a href="{{$setting->whatsapp}}">{{$setting->phone}}</a> </p>
                             </li>
                         </ul>
                         <ul class="social">
-                            <li><a href="{{$setting->facebook}}"><i class="fab fa-facebook-f"> </i></a></li>
-                            <li><a href="{{$setting->twitter}}"><i class="fab fa-twitter"></i></a></li>
-                            <li><a href="{{$setting->whatsapp}}"><i class="fab fa-whatsapp"></i></a></li>
-                            <li><a href="{{$setting->youtube}}"><i class="fab fa-youtube"></i></a></li>
+                            <li><a href="{{$setting->facebook}}" target="_blank"><i class="fab fa-facebook-f"> </i></a></li>
+                            <li><a href="{{$setting->twitter}}" target="_blank"><i class="fab fa-twitter"></i></a></li>
+                            <li><a href="{{$setting->whatsapp}}" target="_blank"><i class="fab fa-whatsapp"></i></a></li>
+                            <li><a href="{{$setting->youtube}}" target="_blank"><i class="fab fa-youtube"></i></a></li>
                         </ul>
                     </div>
                 </div>
@@ -52,7 +52,7 @@ $setting = \App\Models\Setting::first();
                             <div class="widget-form">
                                 <form action="{{route('site_offers')}}" method="post">
                                     @csrf
-                                    <input type="text" placeholder="البريد الالكتروني" name="email">
+                                    <input type="text" placeholder="البريد الالكتروني" name="email" required>
                                     <button type="submit" href="#!" class="animateBTN"> اشترك الان </button>
                                 </form>
                             </div>
@@ -68,7 +68,7 @@ $setting = \App\Models\Setting::first();
         <div class="container">
             <div class="copyright-wrapper">
                 <div class="copyright-text">
-                    <p>جميع الحقوق محفوظة <a href="#!">المطورون</a> &copy; 2021 </p>
+                    <p>جميع الحقوق محفوظة <a href="http://motaweron.com/?fbclid=IwAR10HZ7WgoWploNKrGPck_u1Fkg8LfwIU6W5Y74Mvq3YMEaIUo_G5HP6Mj4">المطورون</a> &copy; 2021 </p>
                 </div>
             </div>
         </div>

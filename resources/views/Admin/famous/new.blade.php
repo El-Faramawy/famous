@@ -49,7 +49,7 @@
                         <div class="d-flex align-items-center">
                             <div class="symbol symbol-50px me-5">
 								<span class="symbol-label bg-light">
-									<img class="h-75" onclick="window.open(this.src)" style='cursor: pointer' src={{asset('/uploads/famous/'.$famous->image)}}  alt="">
+									<img class="h-75" onclick="window.open(this.src)" style='cursor: pointer' src={{asset($famous->image)}}  alt="">
 								</span>
                             </div>
                             <div class="d-flex justify-content-start flex-column">
@@ -59,9 +59,12 @@
                         </div>
                     </td>
                     <td>
-                        {{Str::limit($famous->cv,50)}}
+                        @if($famous->cv != null)
+                            {{Str::limit($famous->cv,50)}}
+                        @else
+                            <span class="text-danger">لا يوجد</span>
+                        @endif
                     </td>
-
                     <td>{{$famous->phone}}</td>
 
                     <td>

@@ -21,7 +21,7 @@ class AboutController extends Controller
         try{
             $file_name = $this->saveImage($request->image,'uploads/about');
             About::create([
-                'image'    => $file_name,
+                'image'    => 'uploads/about/'.$file_name,
                 'title'    => $request->slider_title,
                 'content'  => $request->slider_content,
                 'btn_name' => $request->slider_btn,
@@ -44,7 +44,7 @@ class AboutController extends Controller
             if ($request->has('image')){
                 $file_name = $this->saveImage($request->image, 'uploads/about');
                 $About->update([
-                    'image' => $file_name,
+                    'image' => 'uploads/about/'.$file_name,
                 ]);
             }
 

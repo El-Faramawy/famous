@@ -40,7 +40,7 @@
                     <thead>
                     <tr class="fw-bolder text-muted bg-light">
                         <th class="min-w-80px">الاسم</th>
-                        <th class="min-w-80px">تم اضافتها بتاريخ</th>
+                        <th class="min-w-60px">وقت الاضافة</th>
                         <th class="min-w-200px rounded-end">العمليات</th>
                     </tr>
                     </thead>
@@ -50,13 +50,18 @@
                     @foreach($jobs as $job)
                         <tr>
                             <td>{{$job->title}}</td>
-                            <td>{{$job->created_at}}</td>
+                            <td>
+                                {{ArabicDate($job->created_at)['ar_day_not_current']}} -
+                                {{date('j',strtotime($job->created_at))}}
+                                {{ArabicDate($job->created_at)['month']}}
+                                {{date('Y',strtotime($job->created_at))}}
+                            </td>
                             <td class="">
                                 <button data-bs-toggle='modal' data-bs-target="#edit_job" class="btn btn-icon btn-bg-light btn-primary btn-sm me-1" data-toggle="modal" style="border-radius: 50% !important"
                                         data-id="{{$job->id}}" data-job_title="{{$job->title}}"
                                        >
                             <span class="svg-icon svg-icon-3">
-                                    <i class="bi bi-pencil"></i>
+                                    <i class="fa fa-pencil-alt"></i>
                             </span>
                                     <!--end::Svg Icon-->
                                 </button>
@@ -66,7 +71,7 @@
                                 >
                             <span class="svg-icon svg-icon-3">
                                 <span class="svg-icon svg-icon-3">
-                                    <i class="bi bi-trash"></i>
+                                    <i class="fa fa-trash"></i>
                                 </span>
                             </span>
                                     <!--end::Svg Icon-->
@@ -179,19 +184,19 @@
                     <!--begin::Form-->
                     <form method="post" id="kt_modal_new_card_form" class="form fv-plugins-bootstrap5 fv-plugins-framework" action="{{route('add_job')}}">
                         {{csrf_field()}}
-                        <div class="fv-row mb-5">
+                        <div class="fv-row mb-3">
                             <!--begin::Hint-->
-                            <div class="form-text">اكتب اسم عام للوظيفة مثل : فنان</div>
+                            <div class="form-text fs-3">اكتب اسم عام للوظيفة مثل : فنان</div>
                             <!--end::Hint-->
                         </div>
                         <!--begin::Input group-->
                         <div class="d-flex flex-column mb-7 fv-row fv-plugins-icon-container">
                             <!--begin::Label-->
-                            <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
-                                <span class="required">اسم الوظيفة</span>
+                            <label class="d-flex align-items-center fs-6 fw-bold form-label mb-3">
+                                <span class="required fs-3">اسم الوظيفة</span>
                             </label>
                             <!--end::Label-->
-                            <input type="text" class="form-control form-control-solid mb-4" placeholder="ادخل عنوان الوظيفة" name="job_title" value="" autocomplete="off">
+                            <input type="text" class="form-control form-control-solid mb-4 fs-3" placeholder="ادخل عنوان الوظيفة" name="job_title" value="" autocomplete="off">
                             <!--end::Input group-->
                             <!--begin::Actions-->
                             <div class="text-center pt-5">
@@ -252,15 +257,15 @@
                         <input type="hidden" id="id" name="id">
                         <div class="d-flex flex-column mb-7 fv-row fv-plugins-icon-container">
                             <!--begin::Label-->
-                            <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
+                            <label class="d-flex align-items-center fs-3 fw-bold form-label mb-3">
                                 <span class="required">اسم الوظيفة</span>
                             </label>
                             <!--end::Label-->
-                            <input type="text" class="form-control form-control-solid mb-4" placeholder="ادخل اسم عام للوظيفة" name="job_title"  id="job_title" value="" autocomplete="off">
+                            <input type="text" class="form-control form-control-solid fs-3 mb-4" placeholder="ادخل اسم عام للوظيفة" name="job_title"  id="job_title" value="" autocomplete="off">
                             <!--end::Input group-->
 
                             <!--begin::Actions-->
-                            <div class="text-center pt-5">
+                            <div class="text-center pt-3">
                                 <button type="reset" id="kt_modal_new_card_cancel" class="btn btn-white me-3" data-bs-dismiss="modal">الغاء</button>
                                 <button type="submit" id="kt_modal_new_card_submit" class="btn btn-primary">
                                     <span class="indicator-label">تحديث</span>

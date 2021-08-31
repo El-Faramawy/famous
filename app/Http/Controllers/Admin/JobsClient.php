@@ -20,8 +20,7 @@ class JobsClient extends Controller
             Jop::create([
                'title' => $request->job_title
             ]);
-            toastr()->success('تم اضافة وظيفة جديدة');
-            return back();
+            return back()->with(notification('تم اضافة وظيفة جديدة','success'));
         }
         catch (\Exception $e){
             return redirect()->back()->withErrors(['errors'=>$e->getMessage()]);
@@ -34,8 +33,7 @@ class JobsClient extends Controller
             $job->update([
                 'title'    => $request->job_title,
             ]);
-            toastr()->success('تم التحديث بنجاح');
-            return back();
+            return back()->with(notification('تم تحديث الوظيفة بنجاح','info'));
         }
         catch (\Exception $e){
             return redirect()->back()->withErrors(['errors'=>$e->getMessage()]);
@@ -48,12 +46,10 @@ class JobsClient extends Controller
         $attachedFamous = User::where('job_id',$request->id)->pluck('job_id');
         if($attachedFamous->count() == 0) {
             Jop::findOrFail($request->id)->delete();
-            toastr()->success('تمت حذف الوظيفة بنجاح');
-            return back();
+            return back()->with(notification('تم حذف الوظيفة بنجاح','warning'));
         }
         else{
-            toastr()->error('لا يمكن حذف هذه الوظيفة بسبب وجود مشهورين خاصة بها !');
-            return back();
+            return back()->with(notification('لا يمكن حذف الوظيفة بسبب وجود مشهورين مسجلين بها','error'));
         }
     }
 

@@ -19,14 +19,12 @@ class OfferController extends Controller
     public function delete_one(request $request): \Illuminate\Http\RedirectResponse
     {
         Offers::findOrFail($request->id)->delete();
-        toastr()->success('تم حذف العروض بنجاح');
-        return back();
+        return back()->with(notification('تم حذف المشترك بنجاح','warning'));
     }
 
     public function delete_all(): \Illuminate\Http\RedirectResponse
     {
         Offers::truncate();
-        toastr()->success('تم حذف كل العروض بنجاح');
-        return back();
+        return back()->with(notification('تم حذف جميع المشتركين بنجاح','warning'));
     }
 }

@@ -22,14 +22,13 @@ class SliderController extends Controller
         try{
             $file_name = $this->saveImage($request->image,'uploads/slider');
             Slider::create([
-                'image'    => $file_name,
+                'image'    => 'uploads/slider/'.$file_name,
                 'title'    => $request->slider_title,
                 'content'  => $request->slider_content,
                 'btn_name' => $request->slider_btn,
                 'btn_link' => $request->slider_btn_link,
             ]);
-            toastr()->success('تم الاضافة بنجاح');
-            return back();
+            return back()->with(notification('تم اضافة معرض جديد','success'));
         }
         catch (\Exception $e){
             return redirect()->back()->withErrors(['errors'=>$e->getMessage()]);
@@ -45,7 +44,7 @@ class SliderController extends Controller
             if ($request->has('image')) {
                 $file_name = $this->saveImage($request->image, 'uploads/slider');
                 $Slider->update([
-                    'image' => $file_name,
+                    'image' => 'uploads/slider/'.$file_name,
                 ]);
             }
 
@@ -56,8 +55,7 @@ class SliderController extends Controller
                 'btn_name' => $request->slider_btn,
                 'btn_link' => $request->slider_btn_link,
             ]);
-            toastr()->success('تم التحديث بنجاح');
-            return back();
+            return back()->with(notification('تم تحديث المعرض بنجاح','info'));
         }
         catch (\Exception $e){
             return redirect()->back()->withErrors(['errors'=>$e->getMessage()]);
@@ -67,15 +65,13 @@ class SliderController extends Controller
     public function delete_one(request $request): \Illuminate\Http\RedirectResponse
     {
         Slider::findOrFail($request->id)->delete();
-        toastr()->success('تم حذف المعرض بنجاح');
-        return back();
+        return back()->with(notification('تم حذف المعرض','warning'));
     }
 
 
     public function delete_all(): \Illuminate\Http\RedirectResponse
     {
         Slider::truncate();
-        toastr()->success('تم حذف كل بيانات المعرض بنجاح');
-        return back();
+        return back()->with(notification('تم حذف كل المعارض بنجاح','warning'));
     }
 }

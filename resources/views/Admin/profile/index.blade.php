@@ -1,7 +1,10 @@
 @extends('layouts.admin.app')
+@section('page_name') حسابي @endsection
 @section('content')
-
-
+    <br>
+    <br>
+    <br>
+    <br>
     <div class="m-content">
         <div class="row">
             <div class="col-xl-3 col-lg-4">

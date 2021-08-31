@@ -12,15 +12,42 @@ use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
+    protected function phone_codes(){
+        $phone_codes = [
+            '20' => 'مصر (+20)',
+            '966' => 'السعودية (+966)',
+            '213' => 'الجزائر (+213)',
+            '973' => 'البحرين (+973)',
+            '98' => 'ايران (+98)',
+            '964' => 'العراق (+964)',
+            '962' => 'الاردن (+962)',
+            '965' => 'الكويت (+965)',
+            '961' => 'لبنان (+961)',
+            '218' => 'ليبيا (+218)',
+            '212' => 'المغرب (+212)',
+            '968' => 'عمان (+968)',
+            '974' => 'قطر (+974)',
+            '252' => 'الصومال (+252)',
+            '249' => 'السودان (+249)',
+            '963' => 'سوريا (+963)',
+            '216' => 'تونس (+216)',
+            '971' => 'الامارات (+971)',
+            '969' => 'اليمن (شمالا)(+969)',
+            '967' => 'اليمن (جنوبا)(+967)',
+        ];
+        return $phone_codes;
+    }
     public function show_register_user(){
-        $setting = Setting::first();
-        return view('Site/register-user',compact('setting'));
+        $phone_codes = $this->phone_codes();
+        $setting     = Setting::first();
+        return view('Site/register-user',compact('setting','phone_codes'));
     }
 //    ==============================================================================
     public function show_register_famous(){
-        $setting = Setting::first();
-        $jobs    = Jop::all();
-        return view('Site/register-famous',compact('setting','jobs'));
+        $setting     = Setting::first();
+        $jobs        = Jop::all();
+        $phone_codes = $this->phone_codes();
+        return view('Site/register-famous',compact('setting','jobs','phone_codes'));
     }
 
 
@@ -132,8 +159,9 @@ class UserController extends Controller
 //=====================================================================================================
     public function login(Request $request)
     {
-        $setting = Setting::first();
-        return view('Site/login',compact('setting'));
+        $setting     = Setting::first();
+        $phone_codes = $this->phone_codes();
+        return view('Site/login',compact('setting','phone_codes'));
     }
 //=====================================================================================================
     public function logout()

@@ -183,7 +183,7 @@
     };
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
-    firebase.analytics();
+    // firebase.analytics();
 </script>
 <script type="text/javascript">
     window.onload=function () {

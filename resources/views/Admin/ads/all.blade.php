@@ -1,5 +1,5 @@
 @extends('layouts.admin.app')
-@section('page_name') قائمة المشاهير @endsection
+@section('page_name') قائمة الاعلانات @endsection
 @section('content')
 
 
@@ -11,11 +11,11 @@
     <!--begin::Header-->
     <div class="card-header border-0 pt-5">
         <h3 class="card-title align-items-start flex-column">
-            <span class="card-label fw-bolder fs-3 mb-1">قائمة الاعلانات</span>
+            <span class="card-label fw-bolder fs-3 mb-1">اعلانات المشاهير</span>
         </h3>
-        <div class="card-toolbar">
-            <a href="" class="btn btn-danger er fs-6 px-7 py-3" data-bs-toggle="modal" data-bs-target="#kt_modal_new_card"><span><i class="bi bi-x"></i></span> اعلانات تم رفضها</a>
-        </div>
+{{--        <div class="card-toolbar">--}}
+{{--            <a href="" class="btn btn-danger er fs-6 px-7 py-3" data-bs-toggle="modal" data-bs-target="#kt_modal_new_card"><span><i class="bi bi-x"></i></span> اعلانات تم رفضها</a>--}}
+{{--        </div>--}}
 
     </div>
     <!--end::Header-->
@@ -29,8 +29,8 @@
                 <thead>
                 <tr class="fw-bolder text-muted bg-light">
                     <th>#</th>
-                    <th class="ps-4 min-w-100px rounded-start">صوره المنتج</th>
-                    <th class="ps-4 min-w-100px rounded-start">اسم المنتج</th>
+                    <th class="min-w-60px rounded-start">الاعلان</th>
+                    <th class="ps-4 min-w-80px rounded-start">العميل</th>
                     <th class="min-w-80px">الحاله</th>
                     <th class="min-w-80px">تابع للمشهور:</th>
                     <th class="min-w-200px rounded-end">الباقه المختاره</th>
@@ -39,45 +39,39 @@
                 <!--end::Table head-->
                 <!--begin::Table body-->
                 <tbody>
-                @foreach($ads as $famous)
-
+                @foreach($ads as $ad)
                     <td>{{$loop->iteration}}</td>
                     <td>
                         <div class="d-flex align-items-center">
                             <div class="symbol symbol-50px me-5">
 								<span class="symbol-label bg-light">
-									<img class="h-75" onclick="window.open(this.src)" style='cursor: pointer' src={{asset('/uploads/users/'.$famous->image)}}  alt="">
+									<img class="h-100" onclick="window.open(this.src)" style='cursor: pointer' src={{asset($ad->image)}}  alt="">
 								</span>
                             </div>
-
+                            <div class="d-flex justify-content-start text-left flex-column">
+                                <span class="fw-bolder d-block fs-6">{{$ad->title}}</span>
+                            </div>
                         </div>
                     </td>
-
-
                     <td>
                         <div class="d-flex justify-content-start flex-column">
-                                <a href="#" class="text-dark fw-bolder text-hover-primary mb-1 fs-5">{{$famous->title}}</a>
+                                <a class="text-dark fw-bolder text-hover-primary mb-1 fs-5">{{$ad->user->name}}</a>
                         </div>
                     </td>
 
                     <td>
-                        @if($famous->status == 'new')
-                            <span class="badge badge-warning">معلق</span>
-                        @elseif($famous->status == 'accepted')
+                        @if($ad->status == 'new')
+                            <span class="badge badge-warning text-gray-800">جديد</span>
+                        @elseif($ad->status == 'accepted')
                             <span class="badge badge-success">مقبول</span>
-                        @elseif($famous->status == 'refused')
+                        @elseif($ad->status == 'refused')
                             <span class="badge badge-danger">مرفوض</span>
+                        @else
+                            <span class="badge badge-info">منتهي</span>
                         @endif
                     </td>
-
-                    <td>
-                    {{$famous->user->name}}
-                    </td>
-
-
-                    <td>{{$famous->package->name}}</td>
-
-
+                    <td>{{$ad->package->famous->name}} @if($ad->package->famous->is_favorite == 'yes')<i class="fa fa-medal text-warning"></i> @endif</td>
+                    <td>{{$ad->package->name}} | <span class="fw-bolder">{{$ad->package->price}}</span>  <i class="fa fa-money-bill"></i></td>
                 </tr>
                 @endforeach
 
@@ -91,114 +85,6 @@
     <!--begin::Body-->
 </div>
 <!-----------------------------------Start Data Table ------------------------------------->
-
-<!-------------------------Start DELETE ALL Form ------------------------------------------------------------>
-<div class="modal fade" id="kt_modal_new_card" tabindex="-1" aria-hidden="true">
-    <!--begin::Modal dialog-->
-    <div class="modal-dialog modal-dialog-centered mw-650px">
-        <!--begin::Modal content-->
-        <div class="modal-content">
-            <!--begin::Modal header-->
-            <div class="modal-header">
-                <!--begin::Modal title-->
-                <h2>اعلانات مرفوضة </h2>
-                <!--end::Modal title-->
-                <!--begin::Close-->
-                <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
-                    <!--begin::Svg Icon | path: icons/duotone/Navigation/Close.svg-->
-                    <span class="svg-icon svg-icon-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-															<g transform="translate(12.000000, 12.000000) rotate(-45.000000) translate(-12.000000, -12.000000) translate(4.000000, 4.000000)" fill="#000000">
-																<rect fill="#000000" x="0" y="7" width="16" height="2" rx="1" />
-																<rect fill="#000000" opacity="0.5" transform="translate(8.000000, 8.000000) rotate(-270.000000) translate(-8.000000, -8.000000)" x="0" y="7" width="16" height="2" rx="1" />
-															</g>
-														</svg>
-                    </span>
-                    <!--end::Svg Icon-->
-                </div>
-                <!--end::Close-->
-            </div>
-            <!--end::Modal header-->
-            <!--begin::Modal body-->
-            <div class="modal-body scroll-y mx-3 mx-xl-15 my-3">
-                <!--begin::Form-->
-                <form id="kt_modal_new_card_form" class="form" action="" method="post">
-                    <!--begin::Input group-->
-                    {{csrf_field()}}
-                    <div class="d-flex flex-column mb-3 fv-row">
-                        <!--begin::Label-->
-
-                                    <table id="kt_datatable_example_5" class="table align-middle gs-0 gy-4">
-                <!--begin::Table head-->
-                <thead>
-                <tr class="fw-bolder text-muted bg-light">
-                    <th class="ps-4 min-w-100px rounded-start">صوره المنتج</th>
-                    <th class="ps-4 min-w-100px rounded-start">اسم المنتج</th>
-                    <th class="min-w-80px">الحاله</th>
-                    <th class="min-w-200px rounded-end">الباقه المختاره</th>
-                </tr>
-                </thead>
-                <!--end::Table head-->
-                <!--begin::Table body-->
-                <tbody>
-                 @foreach( $refused_ads as $refused_ad)
-                    <td>
-                        <div class="d-flex align-items-center">
-                            <div class="symbol symbol-50px me-5">
-								<span class="symbol-label bg-light">
-									<img class="h-75" onclick="window.open(this.src)" style='cursor: pointer' src={{asset('/uploads/users/'.$refused_ad->image)}}  alt="">
-								</span>
-                            </div>
-
-                        </div>
-                    </td>
-
-
-                    <td>
-                        <div class="d-flex justify-content-start flex-column">
-                                <a href="#" class="text-dark fw-bolder text-hover-primary mb-1 fs-5">{{$refused_ad->title}}</a>
-                        </div>
-                    </td>
-
-                    <td>
-                        @if($refused_ad->status == 'new')
-                            <span class="badge badge-warning">معلق</span>
-                        @elseif($refused_ad->status == 'accepted')
-                            <span class="badge badge-success">مقبول</span>
-                        @elseif($refused_ad->status == 'refused')
-                            <span class="badge badge-danger">مرفوض</span>
-                        @endif
-                    </td>
-
-                    <td>{{$refused_ad->package->name}}</td>
-
-
-                </tr>
-                @endforeach
-
-                </tbody>
-                <!--end::Table body-->
-            </table>
-            <!--end::Table-->
-                        <!--end::Label-->
-                    </div>
-                    <!--end::Input group-->
-
-                    <!--begin::Actions-->
-                    <div class="text-center pt-3">
-                        <button type="reset" id="kt_modal_new_card_cancel" class="btn btn-white me-3" data-bs-dismiss="modal">الغاء</button>
-                    </div>
-                    <!--end::Actions-->
-                </form>
-                <!--end::Form-->
-            </div>
-            <!--end::Modal body-->
-        </div>
-        <!--end::Modal content-->
-    </div>
-    <!--end::Modal dialog-->
-</div>
-<!-------------------------end DELETE ALL Form ------------------------------------------------------------>
 
 <!-------------------------Start DELETE Form ------------------------------------------------------------>
 <div class="modal fade" id="delete_famous" tabindex="-1" aria-hidden="true">

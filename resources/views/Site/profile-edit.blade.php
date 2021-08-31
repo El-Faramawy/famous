@@ -1,4 +1,5 @@
 @extends('layouts.site.app')
+@section('edit') active @endsection
 @section('site_content')
   <content>
 
@@ -37,19 +38,19 @@
                               <div class="col-md-12 p-2">
                                 <input name="image" type="file" class="dropify" data-default-file="{{get_file($user->image)}}" data-toggle="tooltip" title=" الصورة الشخصية " />
                               </div>
-                              <div class="col-md-6 p-2">
+                              <div class="col-md-12 p-2">
                                 <div class="form-outline ">
                                   <input value="{{$user->name}}" name="name" type="text" class="form-control" />
                                   <label class="form-label"> اسم المشهور </label>
                                 </div>
                               </div>
 
-                              <div class="col-md-6 p-2">
-                                <div class="form-outline ">
-                                    <input value="{{$user->phone}}" id="phone" name="phone" type="text" class="form-control numbersOnly" />
-                                    <label class="form-label"> رقم الهاتف </label>
-                                </div>
-                              </div>
+{{--                              <div class="col-md-6 p-2">--}}
+{{--                                <div class="form-outline ">--}}
+{{--                                    <input value="{{$user->phone}}" id="phone" name="phone" type="text" class="form-control numbersOnly" />--}}
+{{--                                    <label class="form-label"> رقم الهاتف </label>--}}
+{{--                                </div>--}}
+{{--                              </div>--}}
                               <div class="col-md-12 p-2">
                                 <div class="form-group position-relative">
                                     <select class=" select2 " name="job_id" >
@@ -75,7 +76,7 @@
 {{--                          <input class="form-check-input" type="checkbox" id="facebook" />--}}
                           <label class="form-check-label addSocial" for="facebook">
                             <span class="icon" style="background-color: #4267B2;"> <i class="fab fa-facebook"></i> </span>
-                            <input value="{{$user->facebook}}" name="facebook" class="form-control" type="text" placeholder=" ضع الرابط هنا ... ">
+                            <input value="{{$user->facebook}}" name="facebook" class="form-control" type="url" placeholder=" ضع الرابط هنا ... ">
                           </label>
                         </div>
 
@@ -83,7 +84,7 @@
 {{--                          <input class="form-check-input" type="checkbox" id="instagram" />--}}
                           <label class="form-check-label addSocial" for="instagram">
                             <span class="icon" style="background-color: #E1306C;"> <i class="fab fa-instagram"></i> </span>
-                            <input value="{{$user->instagram}}" name="instagram" class="form-control" type="text" placeholder=" ضع الرابط هنا ... ">
+                            <input value="{{$user->instagram}}" name="instagram" class="form-control" type="url" placeholder=" ضع الرابط هنا ... ">
                           </label>
                         </div>
 
@@ -91,7 +92,7 @@
 {{--                          <input class="form-check-input" type="checkbox" id="twitter" />--}}
                           <label class="form-check-label addSocial" for="twitter">
                             <span class="icon" style="background-color: #1DA1F2;"> <i class="fab fa-twitter"></i> </span>
-                            <input value="{{$user->twitter}}" name="twitter" class="form-control" type="text" placeholder=" ضع الرابط هنا ... ">
+                            <input value="{{$user->twitter}}" name="twitter" class="form-control" type="url" placeholder=" ضع الرابط هنا ... ">
                           </label>
                         </div>
 
@@ -99,7 +100,7 @@
 {{--                          <input class="form-check-input" type="checkbox" id="youtube" />--}}
                           <label class="form-check-label addSocial" for="youtube">
                             <span class="icon" style="background-color: #FF0000;"> <i class="fab fa-youtube"></i> </span>
-                            <input value="{{$user->youtube}}" name="youtube" class="form-control" type="text" placeholder=" ضع الرابط هنا ... ">
+                            <input value="{{$user->youtube}}" name="youtube" class="form-control" type="url" placeholder=" ضع الرابط هنا ... ">
                           </label>
                         </div>
 
@@ -108,7 +109,7 @@
                           <label class="form-check-label addSocial" for="snapchat">
                             <span class="icon" style="background-color: #FFFC00;"> <i class="fab fa-snapchat-ghost"></i>
                             </span>
-                            <input value="{{$user->snapchat}}" name="snapchat" class="form-control" type="text" placeholder=" ضع الرابط هنا ... ">
+                            <input value="{{$user->snapchat}}" name="snapchat" class="form-control" type="url" placeholder=" ضع الرابط هنا ... ">
                           </label>
                         </div>
 
@@ -138,14 +139,13 @@
             e.preventDefault();
             var myForm = $("#Form")[0]
             var formData = new FormData(myForm)
+
             $.ajax({
                 url: "{{route('edit_profile')}}",
                 type: 'POST',
                 data: formData,
                 beforeSend: function(){
                     $('.spinner').show()
-                },
-                complete: function(){
                 },
                 success: function (data) {
 
@@ -157,6 +157,11 @@
                                 toastr.error(data.message[key]);
                             });
                         }
+
+                        // if (data.type == 'phone_changed') {
+                        //     phoneSendAuth();
+                        //     $('#exampleModal').modal('show');
+                        // }
 
                         if (data.type == 'success') {
                             Swal.fire({

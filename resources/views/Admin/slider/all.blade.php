@@ -8,14 +8,16 @@
 <br>
 <br>
 @if ($errors->any())
-    <div class="alert alert-danger mt-3 py-4">
-        <h3> خطأ !!</h3>
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: '@foreach ($errors->all() as $error){{ $error }}<br>@endforeach',
+            text: 'حاول مرة اخري!',
+            confirmButtonText: 'حسنا',
+
+// footer: '<a href="">Why do I have this issue?</a>'
+        })
+    </script>
 @endif
 <div class="card mb-5 mb-xl-8 mt-10">
     <!--begin::Header-->
@@ -59,7 +61,7 @@
                         <div class="d-flex align-items-center">
                             <div class="symbol symbol-50px me-5">
 								<span class="symbol-label bg-light">
-									<img class="h-75" onclick="window.open(this.src)" style='cursor: pointer' src={{asset('/uploads/slider/'.$slider->image)}}  alt="">
+									<img class="h-75" onclick="window.open(this.src)" style='cursor: pointer' src={{asset($slider->image)}}  alt="">
 								</span>
                             </div>
                         </div>
@@ -68,15 +70,15 @@
                     <td>{{$slider->title}}</td>
                     <td>{{Str::limit($slider->content,50)}}</td>
                     <td>{{$slider->btn_name}}</td>
-                    <td>{{Str::limit($slider->btn_link,50)}}</td>
+                    <td><a href="{{$slider->btn_link}}">{{Str::limit($slider->btn_link,50)}}</a></td>
                     <td class="">
                         <button data-bs-toggle='modal' data-bs-target="#edit_slider" class="btn btn-icon btn-bg-light btn-primary btn-sm me-1" data-toggle="modal" style="border-radius: 50% !important"
                                 data-id="{{$slider->id}}" data-slider_title="{{$slider->title}}"
                                 data-slider_content="{{$slider->content}}" data-slider_btn="{{$slider->btn_name}}"
-                                data-slider_btn_link="{{$slider->btn_link}}" data-slider_image="{{asset('/uploads/slider/'.$slider->image)}}"
+                                data-slider_btn_link="{{$slider->btn_link}}" data-slider_image="{{asset($slider->image)}}"
                         >
                             <span class="svg-icon svg-icon-3">
-                                    <i class="bi bi-pencil"></i>
+                                    <i class="fa fa-pencil-alt"></i>
                             </span>
                             <!--end::Svg Icon-->
                         </button>
@@ -86,7 +88,7 @@
                         >
                             <span class="svg-icon svg-icon-3">
                                 <span class="svg-icon svg-icon-3">
-                                    <i class="bi bi-trash"></i>
+                                    <i class="fa fa-trash"></i>
                                 </span>
                             </span>
                             <!--end::Svg Icon-->
@@ -522,6 +524,7 @@
 
 @endsection
 <script src="{{url('/')}}/admin/assets/js/jquery.js"></script>
+<script src="{{url('/')}}/admin/assets/js/sweet.js"></script>
 
 <script>
     $(document).ready(function(){

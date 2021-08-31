@@ -57,3 +57,9 @@
         border-radius: 10px;
     }
 </style>
+
+<style>
+    .odometer-inside {
+        direction: ltr !important;
+    }
+</style>

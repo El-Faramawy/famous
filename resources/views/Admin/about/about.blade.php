@@ -8,20 +8,21 @@
 <br>
 <br>
 @if ($errors->any())
-    <div class="alert alert-danger mt-3 py-4">
-        <h3> خطأ !!</h3>
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: '@foreach ($errors->all() as $error){{ $error }}<br>@endforeach',
+            text: 'حاول مرة اخري!',
+            confirmButtonText: 'حسنا',
+        })
+    </script>
 @endif
 <div class="card mb-5 mb-xl-8 mt-10">
     <!--begin::Header-->
     <div class="card-header border-0 pt-5">
         <h3 class="card-title align-items-start flex-column">
-            <span class="card-label fw-bolder fs-3 mb-1">ماذا عنا</span>
+            <span class="card-label fw-bolder fs-3 mb-1"> ماذا عنا
+            </span>
         </h3>
         <div class="card-toolbar">
             <a href="" class="btn btn-light-primary er fs-6 px-7 py-3 ml-2" data-bs-toggle="modal" data-bs-target="#create_about">
@@ -59,7 +60,7 @@
                         <div class="d-flex align-items-center">
                             <div class="symbol symbol-50px me-5">
 								<span class="symbol-label bg-light">
-									<img class="h-75" onclick="window.open(this.src)" style='cursor: pointer' src={{asset('/uploads/about/'.$about->image)}}  alt="">
+									<img class="h-75" onclick="window.open(this.src)" style='cursor: pointer' src={{asset($about->image)}}  alt="">
 								</span>
                             </div>
                         </div>
@@ -73,10 +74,10 @@
                         <button data-bs-toggle='modal' data-bs-target="#edit_about" class="btn btn-icon btn-bg-light btn-primary btn-sm me-1" data-toggle="modal" style="border-radius: 50% !important"
                                 data-id="{{$about->id}}" data-about_title="{{$about->title}}"
                                 data-about_content="{{$about->content}}" data-about_btn="{{$about->btn_name}}"
-                                data-about_btn_link="{{$about->btn_link}}" data-about_image="{{asset('/uploads/about/'.$about->image)}}"
+                                data-about_btn_link="{{$about->btn_link}}" data-about_image="{{asset($about->image)}}"
                         >
                             <span class="svg-icon svg-icon-3">
-                                    <i class="bi bi-pencil"></i>
+                                    <i class="fa fa-pencil-alt"></i>
                             </span>
                             <!--end::Svg Icon-->
                         </button>
@@ -86,7 +87,7 @@
                         >
                             <span class="svg-icon svg-icon-3">
                                 <span class="svg-icon svg-icon-3">
-                                    <i class="bi bi-trash"></i>
+                                    <i class="fa fa-trash"></i>
                                 </span>
                             </span>
                             <!--end::Svg Icon-->
@@ -522,6 +523,7 @@
 
 @endsection
 <script src="{{url('/')}}/admin/assets/js/jquery.js"></script>
+<script src="{{url('/')}}/admin/assets/js/sweet.js"></script>
 
 <script>
     $(document).ready(function(){

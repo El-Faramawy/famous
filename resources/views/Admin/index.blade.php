@@ -1,8 +1,8 @@
 @extends('layouts.admin.app')
 @section('page_name') الرئيسية @endsection
 @section('content')
-<br>
-<br>
+    <br>
+    <br>
     <!--begin::Row-->
     <div class="row gy-5 gx-xl-8 mt-10">
         <!--begin::Col-->
@@ -18,35 +18,35 @@
                 <div class="card-body pt-2">
                     <!--begin::Item-->
                     @foreach($famous as $fam)
-                    <div class="d-flex align-items-center mb-8">
-                        <!--begin::Bullet-->
-                        @if($fam->status == 'accepted')
-                            <span class="bullet bullet-vertical h-40px bg-success"></span>
-                        @elseif($fam->status == 'new')
-                            <span class="bullet bullet-vertical h-40px bg-primary"></span>
-                        @else
-                            <span class="bullet bullet-vertical h-40px bg-danger"></span>
-                        @endif
+                        <div class="d-flex align-items-center mb-8">
+                            <!--begin::Bullet-->
+                            @if($fam->status == 'accepted')
+                                <span class="bullet bullet-vertical h-40px bg-success"></span>
+                            @elseif($fam->status == 'new')
+                                <span class="bullet bullet-vertical h-40px bg-primary"></span>
+                            @else
+                                <span class="bullet bullet-vertical h-40px bg-danger"></span>
+                            @endif
                         <!--end::Bullet-->
-                        <!--begin::Checkbox-->
-                        <div class="symbol symbol-40px me-5 mr-2">
+                            <!--begin::Checkbox-->
+                            <div class="symbol symbol-40px me-5 mr-2">
+                            </div>
+                            <!--end::Checkbox-->
+                            <!--begin::Description-->
+                            <div class="flex-grow-1">
+                                <a href="" class="text-gray-800 text-hover-primary fw-bolder fs-6">{{$fam->name}}</a>
+                                <span class="text-muted fw-bold d-block">{{$fam->job->title}}</span>
+                            </div>
+                            <!--end::Description-->
+                            @if($fam->status == 'accepted')
+                                <span class="badge badge-light-success fs-8 fw-bolder">مقبول</span>
+                            @elseif($fam->status == 'new')
+                                <span class="badge badge-light-primary fs-8 fw-bolder">جديد</span>
+                            @else
+                                <span class="badge badge-light-danger fs-8 fw-bolder">مرفوض</span>
+                            @endif
                         </div>
-                        <!--end::Checkbox-->
-                        <!--begin::Description-->
-                        <div class="flex-grow-1">
-                            <a href="" class="text-gray-800 text-hover-primary fw-bolder fs-6">{{$fam->name}}</a>
-                            <span class="text-muted fw-bold d-block">{{$fam->job->title}}</span>
-                        </div>
-                        <!--end::Description-->
-                        @if($fam->status == 'accepted')
-                            <span class="badge badge-light-success fs-8 fw-bolder">مقبول</span>
-                        @elseif($fam->status == 'new')
-                            <span class="badge badge-light-primary fs-8 fw-bolder">جديد</span>
-                        @else
-                            <span class="badge badge-light-danger fs-8 fw-bolder">مرفوض</span>
-                        @endif
-                    </div>
-                    @endforeach
+                @endforeach
                 <!--end:Item-->
                 </div>
                 <!--end::Body-->
@@ -96,7 +96,7 @@
                                     <td>
                                         <div class="d-flex align-items-center">
                                             <div class="symbol symbol-45px me-5">
-                                                <img class="h-75" onclick="window.open(this.src)" style='cursor: pointer' src={{asset('/uploads/famous/'.$new_famous->image)}}  alt="">
+                                                <img class="h-75" onclick="window.open(this.src)" style='cursor: pointer' src={{asset($new_famous->image)}}  alt="">
                                             </div>
                                             <div class="d-flex justify-content-start flex-column">
                                                 <a href="#" class="text-dark fw-bolder text-hover-primary fs-6">{{$new_famous->name}}</a>
@@ -105,10 +105,10 @@
                                         </div>
                                     </td>
                                     <td>
-                                            <span class="badge badge-warning">معلق</span>
+                                        <span class="badge badge-warning">معلق</span>
                                     </td>
                                     <td>
-                                      <span class="text-muted fw-bold text-muted d-block fs-7">{{$new_famous->phone}}</span>
+                                        <span class="text-muted fw-bold text-muted d-block fs-7">{{$new_famous->phone}}</span>
                                     </td>
                                 </tr>
                             @endforeach
@@ -147,33 +147,33 @@
                 <div class="card-body pt-3">
                     <!--begin::Item-->
                     @foreach($accepted_famous as $acc)
-                    <div class="d-flex align-items-sm-center mb-7">
-                        <!--begin::Symbol-->
-                        <div class="symbol symbol-60px symbol-2by3 me-4">
-                            <div class="symbol-label" style="background-image: url({{asset('uploads/famous/'.$acc->image)}})"></div>
-                        </div>
-                        <!--end::Symbol-->
-                        <!--begin::Content-->
-                        <div class="d-flex flex-row-fluid align-items-center flex-wrap my-lg-0 me-2">
-                            <!--begin::Title-->
-                            <div class="flex-grow-1 my-lg-0 my-2 me-2">
-                                <a href="#" class="text-gray-800 fw-bolder text-hover-primary fs-6">{{$acc->name}}</a>
-{{--                                <span class="text-muted fw-bold d-block pt-1">{{$acc->job->title}}</span>--}}
+                        <div class="d-flex align-items-sm-center mb-7">
+                            <!--begin::Symbol-->
+                            <div class="symbol symbol-60px symbol-2by3 me-4">
+                                <div class="symbol-label" style="background-image: url({{asset($acc->image)}})"></div>
                             </div>
-                            <!--end::Title-->
-                            <!--begin::Section-->
-                            <div class="d-flex align-items-center">
-                                <div class="me-6">
-                                    <i class="bi bi-star-fill me-1 text-warning fs-5"></i>
-                                    <span class="text-gray-800 fw-bolder">{{$acc->rate}}</span>
+                            <!--end::Symbol-->
+                            <!--begin::Content-->
+                            <div class="d-flex flex-row-fluid align-items-center flex-wrap my-lg-0 me-2">
+                                <!--begin::Title-->
+                                <div class="flex-grow-1 my-lg-0 my-2 me-2">
+                                    <a href="#" class="text-gray-800 fw-bolder text-hover-primary fs-6">{{$acc->name}}</a>
+                                    {{--                                <span class="text-muted fw-bold d-block pt-1">{{$acc->job->title}}</span>--}}
                                 </div>
+                                <!--end::Title-->
+                                <!--begin::Section-->
+                                <div class="d-flex align-items-center">
+                                    <div class="me-6">
+                                        <i class="bi bi-star-fill me-1 text-warning fs-5"></i>
+                                        <span class="text-gray-800 fw-bolder">{{$acc->rate}}</span>
+                                    </div>
+                                </div>
+                                <!--end::Section-->
                             </div>
-                            <!--end::Section-->
+                            <!--end::Content-->
                         </div>
-                        <!--end::Content-->
-                    </div>
-                     @endforeach
-                    <!--end::Item-->
+                @endforeach
+                <!--end::Item-->
                 </div>
                 <!--end::Body-->
             </div>
@@ -191,11 +191,11 @@
                 <!--end::Header-->
                 <!--begin::Body-->
                 <div class="card-body pt-0">
-                    @foreach($persons as $person)
+                @foreach($persons as $person)
                     <!--begin::Item-->
-                    <div class="d-flex align-items-center bg-light-info rounded p-5">
-                        <!--begin::Icon-->
-                        <span class="svg-icon svg-icon-info me-5">
+                        <div class="d-flex align-items-center bg-light-info rounded p-5">
+                            <!--begin::Icon-->
+                            <span class="svg-icon svg-icon-info me-5">
         <!--begin::Svg Icon | path: icons/duotone/Home/Library.svg-->
         <span class="svg-icon svg-icon-1">
             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -206,20 +206,20 @@
                 </g>
             </svg>
         </span>
-                            <!--end::Svg Icon-->
+                                <!--end::Svg Icon-->
     </span>
-                        <!--end::Icon-->
-                        <!--begin::Title-->
-                        <div class="flex-grow-1 me-2">
-                            <a class="fw-bolder text-gray-800 text-hover-primary fs-6">{{$person->email}}</a>
-                            <span class="text-muted fw-bold d-block">{{$person->created_at}}</span>
-                        </div>
-                        <!--end::Title-->
-                        <!--begin::Lable-->
-{{--                        <span class="fw-bolder text-info py-1">+8%</span>--}}
+                            <!--end::Icon-->
+                            <!--begin::Title-->
+                            <div class="flex-grow-1 me-2">
+                                <a class="fw-bolder text-gray-800 text-hover-primary fs-6">{{$person->email}}</a>
+                                <span class="text-muted fw-bold d-block">{{$person->created_at}}</span>
+                            </div>
+                            <!--end::Title-->
+                            <!--begin::Lable-->
+                        {{--                        <span class="fw-bolder text-info py-1">+8%</span>--}}
                         <!--end::Lable-->
-                    </div>
-                    <!--end::Item-->
+                        </div>
+                        <!--end::Item-->
                     @endforeach
                 </div>
                 <!--end::Body-->

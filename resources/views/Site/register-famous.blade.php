@@ -67,9 +67,14 @@
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-12">
-                                                                <div class="form-outline ">
-                                                                    <input id="phone_code" name="phone_code" type="text" class="form-control numbersOnly" required/>
-                                                                    <label class="form-label"> كود الهاتف </label>
+                                                                <div class="form-group position-relative">
+                                                                    <select type="number" id="phone_code" name="phone_code"
+                                                                            class="form-control numbersOnly " style="min-height: 56px; margin-bottom:14px ;direction: rtl">
+                                                                        <option selected disabled value="">كود الجوال</option>
+                                                                        @foreach($phone_codes as $key=>$code)
+                                                                            <option value="{{$key}}">{{$code}}</option>
+                                                                        @endforeach
+                                                                    </select>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-12">

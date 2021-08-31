@@ -4,7 +4,7 @@
             <img src="{{get_file($user->image)}}">
         </div>
         <div class="Info">
-            <h5> {{$user->name}}
+            <h5> {{$user->type == 'famous'?$user->name:$user->company_name}}
                 @if($user->is_favorite=='yes' && $user->type == 'famous')
                     <span class="Vip"> <i class="fas fa-medal"></i> </span>
                 @endif
@@ -17,11 +17,16 @@
                                       @for($i=0;$i<$user->rate;$i++)
                                           <i class='fas fa-star'></i>
                                       @endfor
+                                      @for($i=5;$i>$user->rate;$i--)
+                                          <i class='fas fa-star' style="color: #f2f2f2"></i>
+                                      @endfor
                                   </span>
-                        @if($visitor_count != 0)
-                            <span class="count"> من : ( {{$visitor_count}} ) زائر </span>
-                        @endif
                     </div>
+                </div>
+                <div class="d-md-flex align-items-center">
+                    @if($visitor_count != 0)
+                        <span class="count"> <b>عدد الزائرين :</b> ( {{$visitor_count}} ) زائر </span>
+                    @endif
                 </div>
             @endif
 

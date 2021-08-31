@@ -21,9 +21,9 @@ Route::get('/', function () {
 Route::get('about', function () {
     return view('Site/about');
 });
-Route::get('all-famous', function () {
-    return view('Site/all-famous');
-});
+//Route::get('all-famous', function () {
+//    return view('Site/all-famous');
+//});
 //Route::get('code/{id}', 'Site\UserController@code');
 Route::get('contact', function () {
     return view('Site/contact');
@@ -79,6 +79,26 @@ Route::group(['middleware' => 'user:user'], function () {
     Route::post('store_package','Site\ProfileController@store_package')->name('store_package');
     Route::post('store_ad','Site\ProfileController@store_ad')->name('store_ad');
     Route::post('delete_package','Site\ProfileController@delete_package')->name('delete_package');
+
+    ################################# profile-PreviousAds #######################################
+    Route::get('profile-PreviousAds/{id}','Site\PreviousAdsController@clientAds');
+    Route::post('create-PreviousAds','Site\PreviousAdsController@create')->name('create-PreviousAds');
+    Route::post('delete_previousAd','Site\PreviousAdsController@delete')->name('delete_previousAd');
+
+
+    ################################# profile-Rating #######################################
+    Route::get('profile-Rating/{id}','Site\ProfileRatingController@clientRating');
+    Route::post('giveRate','Site\ProfileRatingController@giveRate')->name('giveRate');
+
+
+//    <<<<<<<<<<<<<<<<<<<<ads>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    Route::get('profile-orders', [\App\Http\Controllers\Site\AdsController::class,'index'])->name('profile-orders');
+    Route::post('accepted_ads', [\App\Http\Controllers\Site\AdsController::class,'accepted_ads'])->name('accepted_ads');
+
+//    <<<<<<<<<<<<<<<<<<<<notifications>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+    Route::get('profile-Notifications', [\App\Http\Controllers\Site\NotificationController::class,'index'])->name('profile-Notifications');
+    Route::post('delete_notification', [\App\Http\Controllers\Site\NotificationController::class,'delete_notification'])->name('delete_notification');
 
 
 //    Route::post('/storedata', 'ProfileController@storeData')->name('form.data');

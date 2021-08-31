@@ -44,7 +44,7 @@ License: You must have a valid license purchased only from themeforest(the above
     <link href="{{url('admin/auth')}}/style.bundle.rtl.css" rel="stylesheet" type="text/css" />
 
     <!--end::Global Theme Styles -->
-    <link rel="shortcut icon" href="{{url('Site')}}/img/logo.png" />
+    <link rel="shortcut icon" href="{{url('site')}}/img/logo.png" />
 
 
 
@@ -90,7 +90,7 @@ License: You must have a valid license purchased only from themeforest(the above
             <div class="m-login__container">
                 <div class="m-login__logo">
                     <a href="#">
-                        <img src="{{url('Site')}}/img/logo.png" width="50px" height="50px">
+                        <img src="{{url('site')}}/img/logo.png" width="100px" height="100px">
                     </a>
                 </div>
                 <div class="m-login__signin">

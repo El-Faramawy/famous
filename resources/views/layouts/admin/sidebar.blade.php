@@ -4,7 +4,7 @@
     <div class="aside-logo flex-column-auto" id="kt_aside_logo">
         <!--begin::Logo-->
         <a href="{{--{{route('home')}}--}}">
-            <img alt="Logo" src="{{url('/Site')}}/img/logo.png" class="h-50px logo" />
+            <img alt="Logo" src="{{url('/site')}}/img/logoo.png" class="h-150px w-150px logo" />
         </a>
         <!--end::Logo-->
         <!--begin::Aside toggler-->
@@ -43,6 +43,24 @@
                     </div>
                 </div>
 
+                <!-- ####################### Admins #################### -->
+                <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                    <span class="menu-link"><span class="menu-icon"><i class="bi bi-person fs-2"></i></span>
+                        <span class="menu-title">المشرفين</span><span class="menu-arrow"></span>
+                    </span>
+                    <div class="menu-sub menu-sub-accordion menu-active-bg">
+                        <div class="menu-item">
+                            <a class="menu-link" href="{{route('show-admins')}}"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span>
+                                <span class="menu-title">قائمة المشرفين</span>
+                            </a>
+                        </div>
+                        <div class="menu-item">
+                            <a class="menu-link" href="{{route('add-admin')}}"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span>
+                                <span class="menu-title">اضافة مشرف</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
                 <!-- ####################### Famous #################### -->
                 <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
                     <span class="menu-link"><span class="menu-icon"><i class="bi bi-star fs-3"></i></span>
@@ -196,25 +214,6 @@
                         <div class="menu-item">
                             <a class="menu-link" href="{{route('info')}}"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span>
                                 <span class="menu-title">عرض وتعديل المعلومات</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ####################### Admins #################### -->
-                <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-                    <span class="menu-link"><span class="menu-icon"><i class="bi bi-person fs-2"></i></span>
-                        <span class="menu-title">المشرفين</span><span class="menu-arrow"></span>
-                    </span>
-                    <div class="menu-sub menu-sub-accordion menu-active-bg">
-                        <div class="menu-item">
-                            <a class="menu-link" href="{{route('show-admins')}}"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span>
-                                <span class="menu-title">قائمة المشرفين</span>
-                            </a>
-                        </div>
-                        <div class="menu-item">
-                            <a class="menu-link" href="{{route('add-admin')}}"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span>
-                                <span class="menu-title">اضافة مشرف</span>
                             </a>
                         </div>
                     </div>

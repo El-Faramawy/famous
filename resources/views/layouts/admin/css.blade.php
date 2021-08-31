@@ -1,31 +1,41 @@
 <meta charset="utf-8" />
 <title>صيت المشاهير | لوحة التحكم</title>
-<meta name="description" content="Metronic admin dashboard live demo. Check out all the features of the admin panel. A large number of settings, additional services and widgets." />
-<meta name="keywords" content="Metronic, bootstrap, bootstrap 5, Angular 11, VueJs, React, Laravel, admin themes, web design, figma, web development, ree admin themes, bootstrap admin, bootstrap dashboard" />
-<link rel="canonical" href="Https://preview.keenthemes.com/metronic8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="shortcut icon" href="{{url('admin')}}/assets/media/logos/favicon.ico" />
+<link rel="icon" type="image/x-icon" href="{{url('site')}}/img/logo.png">
 <!--begin::Fonts-->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
 <!--end::Fonts-->
 <!--begin::Global Stylesheets Bundle(used by all pages)-->
 <link href="{{url('admin')}}/assets/plugins/global/plugins.bundle.rtl.css" rel="stylesheet" type="text/css" />
 <link href="{{url('admin')}}/assets/css/style.bundle.rtl.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="{{url('admin')}}/assets/css/all.css"/>
+<link rel="stylesheet" href="{{url('admin')}}/assets/css/fontawesome-stars.css"/>
 <!--end::Global Stylesheets Bundle-->
-
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ==" crossorigin=""/>
+<script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js" integrity="sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw==" crossorigin=""></script>
 
 <link href="https://fonts.googleapis.com/css?family=Cairo&display=swap" rel="stylesheet">
-
 <style>
-    * {
-        font-family: 'Cairo', sans-serif !important;
-        font-size: 15px;
+    *{
+        font-family: 'Cairo', sans-serif;
+        font-size: 16px;
+    }
+    .toast-message{
+        margin-right: 30px !important;
+    }
+    .form-control{
+        font-family: 'Cairo',sans-serif !Important;
     }
     .btn{
+        font-family: "Cairo" ,sans-serif !important;
         font-size: 1.2rem !important;
         border-radius: 7px!important;
+    }
+    input{
+        font-family: "Cairo" ,sans-serif !important;
+    }
+    .swal2-icon.swal2-error.swal2-icon-show {
+        margin: auto;
     }
     @toastr_css
 </style>
@@ -122,7 +132,7 @@
 </style>
 
 {{--=======================  tostar  ====================================--}}
-<link rel="stylesheet" href="{{url('admin/css')}}/tostar.css">
+{{--<link rel="stylesheet" href="{{url('admin/css')}}/tostar.css">--}}
 
 {{--===================================--}}
 
@@ -140,7 +150,7 @@
 <link href="{{url('admin')}}/assets/vendors/custom/fullcalendar/fullcalendar.bundle.rtl.css" rel="stylesheet" type="text/css" />
 
 <!--end::Page Vendors Styles -->
-<link rel="shortcut icon" href="{{url('admin/auth')}}/logo-1.png" />
+{{--<link rel="shortcut icon" href="{{url('admin/auth')}}/logo-1.png" />--}}
 
 <!-- ================== styles dropfy =================== -->
 

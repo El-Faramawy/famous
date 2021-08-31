@@ -4,14 +4,16 @@
 <br>
 <br>
 @if ($errors->any())
-    <div class="alert alert-danger mt-3 py-4">
-        <h3> خطأ !!</h3>
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: '@foreach ($errors->all() as $error){{ $error }}<br>@endforeach',
+            text: 'حاول مرة اخري!',
+            confirmButtonText: 'حسنا',
+
+// footer: '<a href="">Why do I have this issue?</a>'
+        })
+    </script>
 @endif
 <!------------------------------------ start INFO form --------------------------------->
 <div class="card mt-15">
@@ -44,24 +46,12 @@
             <div class="row mb-8">
                 <!--begin::Col-->
                 <div class="col-xl-3">
-                    <div class="fs-6 fw-bold mt-2 mb-3">الهاتف<i class="bi bi-phone mr-2"></i></div>
+                    <div class="fs-6 fw-bold mt-2 mb-3">الهاتف و الواتس <i class="bi bi-phone mr-2"></i></div>
                 </div>
                 <!--end::Col-->
                 <!--begin::Col-->
                 <div class="col-xl-9 fv-row fv-plugins-icon-container">
                     <input type="text" class="form-control form-control-solid" name="phone" value="{{$info->phone}}">
-                    <div class="fv-plugins-message-container invalid-feedback"></div></div>
-            </div>
-            <!--end::Row-->
-            <div class="row mb-8">
-                <!--begin::Col-->
-                <div class="col-xl-3">
-                    <div class="fs-6 fw-bold mt-2 mb-3">واتســاب<i class="bi bi-whatsapp mr-2"></i></div>
-                </div>
-                <!--end::Col-->
-                <!--begin::Col-->
-                <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                    <input type="text" class="form-control form-control-solid" name="whatsapp" value="{{$info->whatsapp}}">
                     <div class="fv-plugins-message-container invalid-feedback"></div></div>
             </div>
 
@@ -103,18 +93,7 @@
                     <input type="text" class="form-control form-control-solid" name="youtube" value="{{$info->youtube}}">
                     <div class="fv-plugins-message-container invalid-feedback"></div></div>
             </div>
-            <!--end::Row-->
-            <div class="row mb-8">
-                <!--begin::Col-->
-                <div class="col-xl-3">
-                    <div class="fs-6 fw-bold mt-2 mb-3">لينك جيميــل<i class="bi bi-mailbox2 mr-2"></i></div>
-                </div>
-                <!--end::Col-->
-                <!--begin::Col-->
-                <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                    <input type="text" class="form-control form-control-solid" name="gmail" value="{{$info->gmail}}">
-                    <div class="fv-plugins-message-container invalid-feedback"></div></div>
-            </div>
+
 
 
         </div>
@@ -129,3 +108,5 @@
 </div>
 
 @endsection
+<script src="{{url('/')}}/admin/assets/js/sweet.js"></script>
+

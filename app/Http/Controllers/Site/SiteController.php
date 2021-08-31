@@ -20,13 +20,13 @@ class SiteController extends Controller
     public function index()
     {
         $show_sliders=Slider::all();
-        $vip_famouses=User::all()->where('is_favorite', 'yes') ;
-        $show_abouts=About::inRandomOrder()->first();
-        $show_abouts2=Slider::inRandomOrder()->first();
-        $show_counters=Counter::all()->take(4);
-        $searched_famous=User::all()->take(10);
+        $vip_famouses=User::where([['type' , 'famous'] , ['is_favorite' , 'yes'] ,[ 'status' ,'accepted']])->get();
+        $show_abouts=About::all()->first();
+        $show_abouts2=Slider::all()->last();
+        $show_counters=Counter::inRandomOrder()->limit(4)->get();
+        $searched_famous=User::where([['type' , 'famous']  ,[ 'status' ,'accepted']])->get();
 //        return $show_abouts;
-        return view('site.index', compact('show_sliders','searched_famous','show_abouts','show_counters','show_abouts2','vip_famouses'));
+        return view('Site.index', compact('show_sliders','searched_famous','show_abouts','show_counters','show_abouts2','vip_famouses'));
 
     }
 

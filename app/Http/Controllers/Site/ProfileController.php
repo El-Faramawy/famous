@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\AdImage;
 use App\Models\Ads;
 use App\Models\Jop;
+use App\Models\notification;
 use App\Models\Package;
 use App\Models\PackageDetails;
 use App\Models\Visitor;
@@ -15,7 +16,8 @@ use Illuminate\Support\Facades\Validator;
 
 class ProfileController extends Controller
 {
-    public function index($id){
+    public function index(Request $request,$id){
+//        return $request->ip();
         $count = Visitor::where(['ip'=> $_SERVER['REMOTE_ADDR'],'famous_id'=>$id])->count();
         if ($count == 0){
             if (auth()->check()){
@@ -36,7 +38,9 @@ class ProfileController extends Controller
         $visitor_count = Visitor::where('famous_id',$id)->count();
         $user = User::with('job')->where('id',$id)->first();
 //        return $user;
-        return view('Site/profile',['user'=>$user,'visitor_count'=>$visitor_count]);
+        $adses = Ads::with('package.famous')->where('user_id' , $user->id)->orderBy('id','DESC')->get();
+//        return $adses;
+        return view('Site/profile',['user'=>$user,'visitor_count'=>$visitor_count,'adses'=>$adses]);
     }
     //==========================================================================================
     public function edit_cv(Request $request){
@@ -77,7 +81,7 @@ class ProfileController extends Controller
 //    }
     //==========================================================================================
     public function store_ad(Request $request){
-//        dd($request->all());
+//       return $request;
         $ad = new Ads;
         $ad->title      = $request->title;
         $ad->user_id    = $request->user_id;
@@ -92,6 +96,13 @@ class ProfileController extends Controller
                 $ad_image->save();
             }
         }
+
+        $notification = new notification();
+        $notification -> message =   '  تم تقديم طلب للاعلان تابعة للباقة ' . '('. $request->package_name  . ')' ;
+        $notification -> famous_id = $request->famous_id;
+        $notification -> created_at = now();
+        $notification ->save();
+
 //        return $ad;
         return redirect()->back()->with(notification('تم الحفظ','success'));
     }
@@ -117,10 +128,10 @@ class ProfileController extends Controller
     {
         $user = User::where('id', $request->id)->first();
         $message = [];
-        $validator = Validator::make($request->all(), [ // <---
-            'phone' => ['required'],
-        ]);
-        $validator->fails() ? $message[] = 'رقم الهاتف مطلوب ' : '';
+//        $validator = Validator::make($request->all(), [ // <---
+//            'phone' => ['required'],
+//        ]);
+//        $validator->fails() ? $message[] = 'رقم الهاتف مطلوب ' : '';
         if ($request->image) {
             $validator = Validator::make($request->all(), [ // <---
                 'image' => ['required'],
@@ -151,19 +162,22 @@ class ProfileController extends Controller
             ]);
             $validator->fails() ? $message[] = 'ايميل الشركة مطلوب ' : '';
         }
-        if ($user->phone != $request->phone) {
-            $validator = Validator::make($request->all(), [ // <---
-                'phone' => ['unique:users'],
-            ]);
-            $validator->fails() ? $message[] = ' رقم الهاتف موجود مسبقا ' : '';
-        }
+//        if ($user->phone != $request->phone) {
+//            $validator = Validator::make($request->all(), [ // <---
+//                'phone' => ['unique:users'],
+//            ]);
+//            $validator->fails() ? $message[] = ' رقم الهاتف موجود مسبقا ' : '';
+//        }
         if ($message != []) {
             return response()->json(['message' => $message, 'type' => 'error']);
-
         }
-        $data = $request->all();
+
+//        if ($user->phone != $request->phone) {
+//            return response()->json([ 'type' => 'phone_changed','phone'=>'+'.$request->phone_code.$request->phone]);
+//        }
+            $data = $request->all();
         if (isset($request->image) && $request->image != '')
-            $data['image'] = upload_image('client', 'image');
+            $data['image'] = upload_image('client', 'image',$data['image'] );
         $user->update($data);
         return response()->json(['type' => 'success']);
     }

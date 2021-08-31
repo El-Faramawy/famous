@@ -29,17 +29,15 @@ Route::group(['prefix' => 'admin'], function () {
 
 
         ###################### Admin ##########################
-        Route::get('show-admins', 'AdminController@get')->name('show-admins');
-        Route::get('add-admin', function () {
-            return view('Admin/Admin/create');
-        })->name('add-admin');
-        Route::post('store.admin', 'AdminController@store_admin')->name('store.admin');
-        Route::post('admin_delete', 'AdminController@admin_delete')->name('admin_delete');
-        Route::get('admin_edit/{id}', 'AdminController@admin_edit')->name('admin_edit');
-        Route::post('admin_check.delete', 'AdminController@admin_check_delete')->name('admin_check.delete');
-        Route::post('store.admin_update', 'AdminController@store_admin_update')->name('store.admin_update');
-        Route::get('my_profile', 'AdminController@my_profile')->name('my_profile');
-        Route::post('store-profile', 'AdminController@save_profile')->name('store-profile');
+        Route::get('show-admins','AdminController@get')->name('show-admins');
+        Route::get('add-admin',function (){return view('Admin/Admin/create');})->name('add-admin');
+        Route::post('store.admin','AdminController@store_admin')->name('store.admin');
+        Route::post('admin_delete','AdminController@admin_delete')->name('admin_delete');
+        Route::post('admin_edit/{id}','AdminController@admin_edit')->name('admin_edit');
+        Route::post('admin_check.delete','AdminController@admin_check_delete')->name('admin_check.delete');
+        Route::post('store.admin_update','AdminController@store_admin_update')->name('store.admin_update');
+        Route::get('my_profile','AdminController@my_profile')->name('my_profile');
+        Route::post('store-profile','AdminController@save_profile')->name('store-profile');
 
 
         ###################### Famous ##########################
@@ -100,6 +98,7 @@ Route::group(['prefix' => 'admin'], function () {
 
         ###################### counter ##########################
         Route::get('counter',[\App\Http\Controllers\Admin\CounterController::class,'index'])->name('counter');
+        Route::get('add_counter',[\App\Http\Controllers\Admin\CounterController::class,'add'])->name('add_counter');
         Route::post('create_counter',[\App\Http\Controllers\Admin\CounterController::class,'create'])->name('create_counter');
         Route::post('delete_one_counter',[\App\Http\Controllers\Admin\CounterController::class,'delete_one'])->name('delete_one_counter');
         Route::post('delete_all_counter',[\App\Http\Controllers\Admin\CounterController::class,'delete_all'])->name('delete_all_counter');
@@ -115,9 +114,7 @@ Route::group(['prefix' => 'admin'], function () {
 
         ###################### ADS ##########################
         Route::get('ADS',[\App\Http\Controllers\Admin\AdsController::class,'index'])->name('ADS');
-
-        ###################### Previous-ads ##########################
-        Route::get('Previous-ads',[\App\Http\Controllers\Admin\PrevAdsController::class,'index'])->name('Previous-ads');
+        Route::get('Previous-ads',[\App\Http\Controllers\Admin\AdsController::class,'previous'])->name('Previous-ads');
 
 
 

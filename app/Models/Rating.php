@@ -7,10 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Rating extends Model
 {
+    protected $guarded = [];
     public function user(){
-        return $this->hasOne(User::class,'user_id');
+        return $this->belongsTo(User::class,'user_id');
     }
     public function famous(){
-        return $this->hasOne(User::class,'famous_id');
+        return $this->belongsTo(User::class,'famous_id');
     }
 }

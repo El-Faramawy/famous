@@ -10,12 +10,12 @@ class RateController extends Controller
 {
     public function index(){
         $rates = Rating::all();
-        return view('admin/rate/index',compact('rates'));
+        return view('Admin/rate/index',compact('rates'));
     }
 
     public function delete(request $request){
         Rating::where('id',$request->id)->delete();
-        toastr()->success('تم حذف التعليق بنجاح');
+        toastr()->success('تم حذف التقييم بنجاح');
         return back();
     }
 }

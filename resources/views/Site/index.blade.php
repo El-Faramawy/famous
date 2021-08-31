@@ -9,7 +9,7 @@
         <div class="swiper-wrapper">
             @foreach($show_sliders as $show_slider )
                 <div class="swiper-slide">
-                  <img src={{asset('uploads/slider/'. $show_slider->image)}}>
+                  <img src={{get_file($show_slider->image)}}>
                </div>
             @endforeach
         </div>
@@ -41,7 +41,7 @@
               <ul id="myUL">
                @foreach($searched_famous as $searched_fam )
                 <li>
-                      <a href="{{url('profile')}}"> <img src={{asset('uploads/famous/'. $searched_fam->image)}}>
+                      <a href="{{url('profile/'.$searched_fam->id) }}"> <img src={{get_file( $searched_fam->image)}}>
                           {{$searched_fam->name}}
                       </a>
                 </li>
@@ -63,8 +63,8 @@
             <div class="swiper-wrapper">
              @foreach($vip_famouses as $vip_famouse )
                     <div class="swiper-slide p-2">
-                    <a href="{{url('profile')}}" class=" famous vip">
-                      <img src="{{asset('uploads/famous/'. $vip_famouse->image)}}">
+                    <a href="{{url('profile/'.$vip_famouse->id)}}" class=" famous vip">
+                      <img src="{{asset( $vip_famouse->image)}}">
                       <div class="info">
                         <p> {{$vip_famouse->name}} </p>
                         <span>{{$vip_famouse->job->title}} </span>
@@ -87,31 +87,36 @@
                   <div class="col-md-6 p-0 order-md-last">
 
                       <div class="entry-media">
-                          <img src="{{asset('uploads/about/'. $show_abouts->image)}}">
+                          <img src="{{get_file( $show_abouts->image)}}">
+
                           <div class="entry-hover">
-                              <a href=""><i class="fal fa-radar"></i></a>
+{{--                              <a href="#!"><i class="fal fa-radar" aria-hidden="true"></i></a>--}}
                           </div>
                           <svg viewBox="0 0 25 100" class="curved-shape">
                               <path d="M25,0C25,37.5,0,37.5,0,50s25,12.5,25,50"></path>
                           </svg>
                       </div>
                   </div>
-
                   <div class="col-md-6 p-0 order-md-first">
                       <div class="entry-info">
-                          <h3>{{$show_abouts->title}} </h3>
-                              <p>{{$show_abouts->content}}</p>
-                          <a href="" class="animateBTN"> {{$show_abouts->btn_name}} </a>
+
+                          <h3> {{$show_abouts->title}} </h3>
+                          <p>{{$show_abouts->content}}</p>
+                          <a href="{{$show_abouts->btn_link}}" class="animateBTN">{{$show_abouts->btn_name}} </a>
+
                       </div>
                   </div>
+
+
               </div>
+
               <div class="row align-items-center">
                   <div class="col-md-6 p-0 ">
 
                       <div class="entry-media">
-                          <img src="{{asset('uploads/about/'. $show_abouts2->image)}}">
+                          <img src="{{get_file( $show_abouts2->image)}}">
                           <div class="entry-hover">
-                              <a href=""><i class="fal fa-radar" aria-hidden="true"></i></a>
+{{--                              <a href=""><i class="fal fa-radar" aria-hidden="true"></i></a>--}}
                           </div>
                           <svg viewBox="0 0 25 100" class="curved-shape curved-shape2">
                               <path d="M25,0C25,37.5,0,37.5,0,50s25,12.5,25,50"></path>
@@ -123,7 +128,7 @@
 
                           <h3> {{$show_abouts2->title}} </h3>
                               <p> {{$show_abouts2->content}}</p>
-                          <a href="" class="animateBTN">{{$show_abouts2->btn_name}} </a>
+                          <a href="{{$show_abouts2->btn_link}}" class="animateBTN">{{$show_abouts2->btn_name}} </a>
 
                       </div>
                   </div>
@@ -143,7 +148,7 @@
                       <h3>
                         <span class="odometer" data-count="{{$show_counter->number}}">00</span>
                       </h3>
-                      <i class="fad fa-stars"></i>
+                      <i class="{{$show_counter->icon}}"></i>
                       <p> {{$show_counter->title}} </p>
                     </div>
                   </div>
@@ -157,21 +162,21 @@
 
 @endsection
 <script>
-function myFunction() {
-var input, filter, ul, li, a, i, txtValue;
-input = document.getElementById("myInput");
-filter = input.value.toUpperCase();
-ul = document.getElementById("myUL");
-li = ul.getElementsByTagName("li");
-for (i = 0; i < li.length; i++) {
-a = li[i].getElementsByTagName("a")[0];
-txtValue = a.textContent || a.innerText;
-if (txtValue.toUpperCase().indexOf(filter) > -1) {
-li[i].style.display = "";
-} else {
-li[i].style.display = "none";
-}
-}
-}
+    function myFunction() {
+        var input, filter, ul, li, a, i, txtValue;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        ul = document.getElementById("myUL");
+        li = ul.getElementsByTagName("li");
+        for (i = 0; i < li.length; i++) {
+            a = li[i].getElementsByTagName("a")[0];
+            txtValue = a.textContent || a.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                li[i].style.display = "";
+            } else {
+                li[i].style.display = "none";
+            }
+        }
+    }
 </script>
 

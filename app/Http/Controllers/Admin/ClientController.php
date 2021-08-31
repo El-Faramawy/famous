@@ -17,14 +17,12 @@ class ClientController extends Controller
     public function delete_one(request $request): \Illuminate\Http\RedirectResponse
     {
         User::where([['type','client'],['id',$request->id]])->delete();
-        toastr()->success('تم حذف العميل بنجاح');
-        return back();
+        return back()->with(notification('تم الحذف العميل بنجاح','success'));
     }
 
     //  Delete all clients
     public function delete_all(){
         User::where('type','client')->delete();
-        toastr()->success('تم حذف جميع العملاء بنجاح');
-        return back();
+        return back()->with(notification('تم الحذف جميع العملاء بنجاح','success'));
     }
 }
