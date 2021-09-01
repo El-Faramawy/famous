@@ -1,4 +1,5 @@
 @extends('layouts.site.app')
+@section('notification') active @endsection
 @section('site_content')
 
     <content>

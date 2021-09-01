@@ -139,7 +139,7 @@ border-top: none;
             <label class="form-label"> اسم الاعلان </label>
           </div>
             <div class="form-outline">
-                <input type="date" class="form-control date" required name="date">
+                <input type="date" class="form-control date " required name="date">
                 <label class="form-label"> تاريخ الاعلان </label>
             </div>
             <p>المنتج المعلن عنه</p>

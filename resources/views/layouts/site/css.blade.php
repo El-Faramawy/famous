@@ -63,3 +63,16 @@
         direction: ltr !important;
     }
 </style>
+
+{{--==================================  change date icon in previos ads  ==========================--}}
+<style>
+    input[type="date"]::-webkit-inner-spin-button,
+    input[type="date"]::-webkit-calendar-picker-indicator {
+    position: absolute;
+        left: -10px ;
+    }
+    input[type="date"]{
+        padding-left:30px !important;
+    }
+
+</style>
