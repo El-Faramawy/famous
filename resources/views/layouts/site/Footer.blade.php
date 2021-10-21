@@ -68,7 +68,7 @@ $setting = \App\Models\Setting::first();
         <div class="container">
             <div class="copyright-wrapper">
                 <div class="copyright-text">
-                    <p>جميع الحقوق محفوظة <a href="http://motaweron.com/?fbclid=IwAR10HZ7WgoWploNKrGPck_u1Fkg8LfwIU6W5Y74Mvq3YMEaIUo_G5HP6Mj4">المطورون</a> &copy; 2021 </p>
+                    <p>جميع الحقوق محفوظة <a href="https://smartlines.tech/" target="_blank">سمارت لاين</a> &copy; {{date('Y')}} </p>
                 </div>
             </div>
         </div>
